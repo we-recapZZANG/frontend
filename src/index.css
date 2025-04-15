@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('assets/woff/Pretendard-Medium.woff') format('woff'),
+    url('assets/woff/Pretendard-Regular.woff') format('woff');
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+  line-height: 1.5;
+  -webkit-overflow-scrolling: touch;
+}
+
+html {
+  scroll-behavior: smooth;
+  max-width: 600px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+input,
+button,
+textarea {
+  outline: none;
+}

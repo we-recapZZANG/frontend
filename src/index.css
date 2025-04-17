@@ -1,6 +1,54 @@
+@import 'tailwindcss';
+
+:root {
+  --font-display: 'Pretendard';
+  --breakpoint-3xl: 1920px;
+  --color-pink-200: #fff6f5;
+  --color-pink-300: #ffe4e1;
+  --color-pink-400: #ff6d6d;
+  --color-grey-200: #d9d9d9;
+  --color-grey-300: #f5f5f5;
+  --color-grey-400: #acacac;
+  --color-grey-500: #5a5a5a;
+  --color-grey-600: #717171;
+  --color-blue-200: #eff8ff;
+  --color-yellow-200: #fffaf0;
+  --color-black-100: #000000;
+  /* ... */
+}
+
+@layer utilities {
+  .bg-pink {
+    background-color: var(--color-pink-200);
+  }
+  .bg-yellow {
+    background-color: var(--color-yellow-200);
+  }
+  .text-grey-400 {
+    color: var(--color-grey-400);
+  }
+  .text-large {
+    color: var(--color-grey-400);
+    font-size: large;
+  }
+  .text-title {
+    color: var(--color-black-100);
+    font-size: large;
+    font-weight: bold;
+  }
+  .text-grey-300 {
+    color: var(--color-grey-300);
+  }
+  .text-description {
+    color: var(--color-grey-400);
+    font-size: small;
+  }
+  .border-grey-200 {
+    border: 1px solid var(--color-grey-200);
+  }
+}
+
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 

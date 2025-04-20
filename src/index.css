@@ -21,6 +21,9 @@
   .bg-pink {
     background-color: var(--color-pink-200);
   }
+  .bg-pink-primary {
+    background-color: var(--color-pink-300);
+  }
   .bg-yellow {
     background-color: var(--color-yellow-200);
   }
@@ -48,14 +51,46 @@
   }
 }
 
+@keyframes floatVertical {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px); /* 위아래로 이동 */
+  }
+}
+
+.animate-float-vertical {
+  animation: floatVertical 2s ease-in-out infinite;
+}
+
 * {
   box-sizing: border-box;
 }
 
 @font-face {
   font-family: 'Pretendard';
-  src: url('assets/woff/Pretendard-Medium.woff') format('woff'),
-    url('assets/woff/Pretendard-Regular.woff') format('woff');
+  font-weight: 300;
+  src: url('/assets/woff/Pretendard-Light.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 400;
+  src: url('/assets/woff/Pretendard-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 500;
+  src: url('/assets/woff/Pretendard-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 700;
+  src: url('/assets/woff/Pretendard-Bold.woff') format('woff');
 }
 
 body {
@@ -75,7 +110,6 @@ a {
 
 button {
   cursor: pointer;
-  background-color: transparent;
   border: none;
 }
 

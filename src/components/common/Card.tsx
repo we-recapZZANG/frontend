@@ -15,7 +15,7 @@ const CardWrapper = ({ size = 'medium', children }: CardWrapperProps) => {
       style={{
         boxShadow: '2px 3px 5px rgba(0, 0, 0, 0.05)',
       }}
-      className={`gap-4 bg-white  border-grey-100  ${sizeClasses[size]} flex flex-col  cursor-pointer`}
+      className={`gap-4 bg-white border border-gray-100 ${sizeClasses[size]} flex flex-col cursor-pointer`}
     >
       {children}
     </div>

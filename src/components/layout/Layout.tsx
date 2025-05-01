@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import NavigationBar from '../common/NavigationBar';
 import { useMemo } from 'react';
+import Header from '../common/Header';
 
 const Layout = () => {
   const location = useLocation();
@@ -13,9 +14,7 @@ const Layout = () => {
 
   return (
     <div className="w-full flex align-items flex-col justify-center">
-      <header className="w-full h-15 flex items-center px-4 bg-pink-300 text-pink-400">
-        Logo
-      </header>
+      <Header />
       <main
         className={`relative w-full h-screen md:w-1/2 md:h-screen flex flex-col px-6 py-10 ${bgColor}`}
       >

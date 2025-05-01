@@ -1,5 +1,5 @@
 import CardWrapper from '../common/Card';
-import PlayButton from '../common/PlayButton';
+import PlayButton from '../common/button/PlayButton';
 import ProgressBar from './ProgressBar';
 
 const title = '작은 토끼의 모험';

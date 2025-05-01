@@ -1,15 +1,17 @@
 import { ReactNode } from 'react';
 import NavigationBar from '../../components/common/NavigationBar';
+import { useNavigate } from 'react-router-dom';
 
 interface DetailLayoutProps {
   children: ReactNode;
 }
 
 const DetailLayout = ({ children }: DetailLayoutProps) => {
+  const navigate = useNavigate();
   return (
     <div className="w-full flex flex-col align-items justify-center">
       <header className="w-full h-[50px] bg-pink flex flex-row justify-between items-center p-2 pr-4">
-        <button>
+        <button onClick={() => navigate(-1)}>
           <img src="/icon/back.svg" alt="back-button" width={25} height={25} />
         </button>
 

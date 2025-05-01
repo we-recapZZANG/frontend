@@ -7,7 +7,6 @@ const EditStoryPage = () => {
   return (
     <DetailLayout>
       <form onSubmit={() => {}} className="w-full flex flex-col  flex-grow">
-        {/* 제목 입력 */}
         <div className="mt-5">
           <label className="font-bold">제목</label>
           <input
@@ -17,7 +16,6 @@ const EditStoryPage = () => {
           />
         </div>
 
-        {/* 카테고리 선택 */}
         <div className="mt-8">
           <label className="font-bold">카테고리</label>
           <div className="flex flex-wrap gap-2 ">
@@ -37,7 +35,6 @@ const EditStoryPage = () => {
             ))}
           </div>
 
-          {/**내용 입력 */}
           <div className="mt-8">
             <label className="font-bold">내용</label>
             <textarea

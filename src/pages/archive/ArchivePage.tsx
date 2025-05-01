@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import ArchiveCard from '../../components/archive/ArchiveCard';
 
 const ARCHIVEDATA: {
@@ -59,6 +60,7 @@ const ARCHIVEDATA: {
 ];
 
 const ArchivePage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <h2 className="font-bold text-lg">추억 보관함</h2>
@@ -68,7 +70,10 @@ const ArchivePage = () => {
           return <ArchiveCard story={data} />;
         })}
       </div>
-      <button className="fixed bottom-18  right-0 p-2">
+      <button
+        className="fixed bottom-18  right-0 p-2"
+        onClick={() => navigate('/archive/edit/:id')}
+      >
         <img
           src="./icon/add-button.svg"
           width={80}

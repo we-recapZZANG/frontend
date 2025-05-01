@@ -1,4 +1,7 @@
+import { useNavigate } from 'react-router-dom';
+
 const OnboardingPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="w-full flex align-items justify-center">
       <main className="relative w-full h-screen md:w-1/2 md:h-screen bg-pink flex flex-col items-center justify-center px-6 py-10">
@@ -30,6 +33,9 @@ const OnboardingPage = () => {
             boxShadow: '2px 3px 5px rgba(0, 0, 0, 0.05)',
           }}
           aria-label="시작하기 버튼"
+          onClick={() => {
+            navigate('/user/login');
+          }}
         >
           시작하기
         </button>

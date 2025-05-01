@@ -9,7 +9,8 @@ interface ArchiveProps {
 
 const ArchiveCard = ({ story }: { story: ArchiveProps }) => {
   const imageSrc =
-    story.category === '동화' ? './icon/rabbit.png' : './icon/heart.png';
+    story.category === '동화' ? '/icon/rabbit.png' : '/icon/heart.png';
+
   return (
     <div
       style={{

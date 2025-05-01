@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import CardWrapper from '../../common/Card';
+import CardWrapper from '../../common/card/Card';
 import { useForm } from 'react-hook-form';
 import TextField from '../../common/textField/TextField';
 
@@ -72,7 +72,7 @@ const Login = () => {
           navigate('/user/signup');
         }}
       >
-        아직 회원이 아니신가요?{' '}
+        아직 회원이 아니신가요?
       </button>
     </div>
   );

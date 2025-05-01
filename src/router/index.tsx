@@ -1,13 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
 import HomePage from '../pages/main/HomePage';
 import OnboardingPage from '../pages/main/OnboardingPage';
-import LoginPage from '../pages/main/AuthPage';
 import Layout from '../components/layout/Layout';
 import ArchivePage from '../pages/archive/ArchivePage';
 import EditStoryPage from '../pages/archive/EditStoryPage';
 import PlayAudioBook from '../pages/track/PlayAudioBookPage';
 import NotfoundPage from '../pages/error/NotfoundPage';
 import AuthPage from '../pages/main/AuthPage';
+import Consent from '../components/main/user/Consent';
+import CamPage from '../pages/cam/CamPage';
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,16 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    path: '/sleep',
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <CamPage />,
+      },
+    ],
+  },
+  {
     path: '/archive/edit/:id',
     element: <EditStoryPage />,
   },
@@ -47,9 +58,14 @@ export const router = createBrowserRouter([
     element: <AuthPage />,
   },
   {
+    path: 'consent',
+    element: <Consent />,
+  },
+  {
     path: 'play/:storyId',
     element: <PlayAudioBook />,
   },
+
   {
     path: '/*',
     element: <NotfoundPage />,

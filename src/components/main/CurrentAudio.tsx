@@ -1,4 +1,4 @@
-import CardWrapper from '../common/Card';
+import CardWrapper from '../common/card/Card';
 import PlayButton from '../common/button/PlayButton';
 import ProgressBar from './ProgressBar';
 

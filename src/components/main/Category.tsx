@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { CategoryType } from '../../type';
-import CardWrapper from '../common/Card';
+import CardWrapper from '../common/card/Card';
 
 const cards: CategoryType[] = [
   {

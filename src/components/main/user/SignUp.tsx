@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import CardWrapper from '../../common/Card';
+import CardWrapper from '../../common/card/Card';
 import { Checkbox } from '../../components/ui/checkbox';
 import TextField from '../../common/textField/TextField';
 
@@ -40,7 +40,7 @@ const SignUp = () => {
               },
               validate: (value) =>
                 !/[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(value) ||
-                '아이디에는 한글을 사용할 수 없습니다.',
+                '아이디는 영어로 입력해주세요.',
             })}
             placeholder="아이디를 입력하세요"
             label="아이디"
@@ -63,7 +63,7 @@ const SignUp = () => {
               },
               validate: (value) =>
                 !/[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(value) ||
-                '비밀번호에는 한글을 사용할 수 없습니다.',
+                '비밀번호는 영어로 입력해주세요.',
             })}
             placeholder="비밀번호를 입력하세요"
             label="비밀번호"

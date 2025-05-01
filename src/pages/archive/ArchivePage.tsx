@@ -62,7 +62,7 @@ const ARCHIVEDATA: {
 const ArchivePage = () => {
   const navigate = useNavigate();
   return (
-    <>
+    <div className="px-6 py-10">
       <h2 className="font-bold text-lg">추억 보관함</h2>
       <p className="text-description">아이와 엄마의 추억 보관함</p>
       <div className="grid grid-cols-2 mt-5 gap-4">
@@ -81,7 +81,7 @@ const ArchivePage = () => {
           alt="add-story-buttton"
         />
       </button>
-    </>
+    </div>
   );
 };
 

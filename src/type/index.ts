@@ -23,3 +23,8 @@ export type AudioBook = {
   content: string;
   createdAt: string;
 };
+
+export type TimeStampEntry = {
+  category: string;
+  timeStamp: string;
+};

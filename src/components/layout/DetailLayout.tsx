@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import NavigationBar from '../../components/common/NavigationBar';
+import NavigationBar from '../common/nav/NavigationBar';
 import { useNavigate } from 'react-router-dom';
 
 interface DetailLayoutProps {

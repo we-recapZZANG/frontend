@@ -1,8 +1,8 @@
-import NavigationBar from '../../components/common/NavigationBar';
+import NavigationBar from '../../components/common/nav/NavigationBar';
 import { AudioBook, Track } from '../../type';
 import TrackTab from '../../components/track/TrackTab';
 import TrackList from '../../components/track/TrackList';
-import Header from '../../components/common/Header';
+import Header from '../../components/common/nav/Header';
 import PlayAudioBook from '../../components/track/PalyAudioBook';
 import { useState } from 'react';
 import AddTrackList from '../../components/track/AddTrackList';

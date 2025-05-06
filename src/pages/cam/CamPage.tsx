@@ -2,8 +2,19 @@ import { useEffect, useRef, useState } from 'react';
 import Cam from '../../components/cam/Cam';
 import Motion from '../../components/cam/Motion';
 import TimeStamp from '../../components/cam/TimeStamp';
-import axios from 'axios';
 import { TimeStampEntry } from '../../type';
+import api from '../../api/base';
+
+const timeStams = [
+  {
+    category: 'faceDown',
+    timeStamp: '00:14',
+  },
+  {
+    category: 'etc',
+    timeStamp: '04:24',
+  },
+];
 
 const CamPage = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -30,7 +41,7 @@ const CamPage = () => {
   useEffect(() => {
     const fetchVideoUrl = async () => {
       try {
-        const response = await axios.get('/api/videos/location');
+        const response = await api.get('/api/videos/location');
         setVideoUrl(response.data.videoLocation);
       } catch (error) {
         console.error('영상 정보를 불러오는 데 실패했습니다.', error);
@@ -43,7 +54,7 @@ const CamPage = () => {
   useEffect(() => {
     const fetchTimestamps = async () => {
       try {
-        const res = await axios.get('/api/videos');
+        const res = await api.get('api/videos');
         setTimestamps(res.data.timeStamps);
       } catch (error) {
         console.error('타임스탬프 불러오기 실패', error);
@@ -55,7 +66,7 @@ const CamPage = () => {
 
   return (
     <div>
-      <Cam videoRef={videoRef} videoUrl={videoUrl} />
+      <Cam timestamps={timestamps} videoRef={videoRef} videoUrl={videoUrl} />
       <div className="flex flex-col p-4">
         <Motion movingTime={movingTime} quality={sleepQuality} />
       </div>

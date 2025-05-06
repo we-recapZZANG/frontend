@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import api from '../../api/base';
 
 interface RegisterFormData {
   email: string;
@@ -13,7 +14,7 @@ export function useRegisterForm() {
 
   const onSubmitForm = async (data: RegisterFormData): Promise<boolean> => {
     try {
-      const response = await axios.post('/api/signup', {
+      const response = await api.post('/api/signup', {
         email: data.email,
         name: data.name,
         password: data.password,

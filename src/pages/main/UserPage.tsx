@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Category from '../../components/main/Category';
 import { useEffect, useState } from 'react';
+import api from '../../api/base';
 
 const UserPage = () => {
   const navigate = useNavigate();
@@ -20,6 +21,16 @@ const UserPage = () => {
     return null; // user가 없으면 아무것도 렌더링하지 않음
   }
 
+  const handleLogout = async () => {
+    try {
+      await api.post('/api/signout');
+      localStorage.removeItem('user');
+      navigate('/');
+    } catch (error) {
+      console.error('로그아웃 실패:', error);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-6">
       <div className="w-full flex flex-col justify-center items-center bg-white h-[250px]">
@@ -33,10 +44,7 @@ const UserPage = () => {
         <div className="p-6 w-full ">
           <button
             className="w-full bg-pink-400 text-white font-semibold px-4 py-2 rounded-md hover:bg-pink-100 transition-colors duration-200"
-            onClick={() => {
-              localStorage.removeItem('userName');
-              navigate('/');
-            }}
+            onClick={handleLogout}
           >
             로그아웃
           </button>

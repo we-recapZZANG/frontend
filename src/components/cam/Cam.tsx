@@ -1,14 +1,61 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { TimeStampEntry } from '../../type';
+import { toast } from 'react-toastify';
 
 interface CamProps {
   videoRef?: React.RefObject<HTMLVideoElement | null>;
   videoUrl: string;
+  timestamps: TimeStampEntry[];
 }
 
-const Cam = ({ videoRef, videoUrl }: CamProps) => {
+const Cam = ({ videoRef, videoUrl, timestamps }: CamProps) => {
   if (!videoUrl) {
     return <div>영상을 받아올 수 없습니다.</div>;
   }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const currentTime = videoRef?.current?.currentTime;
+      if (!currentTime) return;
+
+      const currentFormatted = formatTime(currentTime);
+
+      const matchedTimestamp = timestamps.find(
+        (timestamp) =>
+          timestamp.timeStamp === currentFormatted &&
+          timestamp.category === 'facedown'
+      );
+
+      if (matchedTimestamp) {
+        toast.info(`${matchedTimestamp.category}`, {
+          position: 'bottom-right',
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          theme: 'light',
+        });
+        playAlarm();
+      }
+    }, 1000);
+
+    const formatTime = (seconds: number) => {
+      const min = Math.floor(seconds / 60)
+        .toString()
+        .padStart(2, '0');
+      const sec = Math.floor(seconds % 60)
+        .toString()
+        .padStart(2, '0');
+      return `${min}:${sec}`;
+    };
+
+    const playAlarm = () => {
+      const audio = new Audio('/alarm.mp3');
+      audio.play().catch((err) => console.error('알람 재생 실패', err));
+    };
+
+    return () => clearInterval(interval);
+  }, [timestamps, videoRef]);
+
   return (
     <div className="flex justify-center">
       <video

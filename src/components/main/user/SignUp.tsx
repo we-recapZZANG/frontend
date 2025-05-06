@@ -2,16 +2,31 @@ import { useForm } from 'react-hook-form';
 import CardWrapper from '../../common/card/Card';
 import { Checkbox } from '../../components/ui/checkbox';
 import TextField from '../../common/textField/TextField';
+import { useRegisterForm } from '../../../hooks/user/useRegisterForm';
+
+type FormValues = {
+  email: string;
+  password: string;
+  name: string;
+};
 
 const SignUp = () => {
   const {
     register,
     formState: { isSubmitting, errors },
     handleSubmit,
-  } = useForm({
+    reset,
+  } = useForm<FormValues>({
     mode: 'onChange',
-    defaultValues: { userid: '', password: '', username: '' },
+    defaultValues: { email: '', password: '', name: '' },
   });
+
+  const { onSubmitForm, serverError, successMessage } = useRegisterForm();
+
+  const handleRegister = async (data: FormValues) => {
+    const isSuccess = await onSubmitForm(data);
+    if (isSuccess) reset();
+  };
 
   return (
     <>
@@ -25,28 +40,28 @@ const SignUp = () => {
       </div>
 
       <CardWrapper size="large">
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit(handleRegister)} className="space-y-4">
           <TextField
-            id="userid"
-            register={register('userid', {
-              required: '아이디는 필수 입력 사항입니다.',
+            id="email"
+            register={register('email', {
+              required: '이메일은 필수 입력 사항입니다.',
               maxLength: {
-                value: 20,
-                message: '아이디는 20글자를 넘길 수 없습니다.',
+                value: 50,
+                message: '이메일은 50글자를 넘길 수 없습니다.',
               },
-              minLength: {
-                value: 6,
-                message: '6~20글자의 영문자를 입력해주세요.(숫자 포함)',
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: '올바른 이메일 형식을 입력해주세요.',
               },
               validate: (value) =>
                 !/[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(value) ||
-                '아이디는 영어로 입력해주세요.',
+                '이메일은 영어로 입력해주세요.',
             })}
-            placeholder="아이디를 입력하세요"
-            label="아이디"
-            error={errors.userid?.message}
+            placeholder="이메일을 입력하세요"
+            label="이메일"
+            error={errors.email?.message}
             isDisabled={isSubmitting}
-            isRequired={true}
+            isRequired
           />
 
           <TextField
@@ -73,13 +88,13 @@ const SignUp = () => {
           />
 
           <TextField
-            id="username"
-            register={register('username', {
+            id="name"
+            register={register('name', {
               required: '이름은 필수 입력 사항입니다.',
             })}
             placeholder="이름을 입력하세요"
             label="이름"
-            error={errors.username?.message}
+            error={errors.name?.message}
             isDisabled={isSubmitting}
             isRequired
           />
@@ -101,10 +116,15 @@ const SignUp = () => {
             </div>
           </div>
 
+          {serverError && <p className="text-sm text-red-500">{serverError}</p>}
+          {successMessage && (
+            <p className="text-sm text-green-500">{successMessage}</p>
+          )}
+
           <div>
             <button
               type="submit"
-              className="w-full h-[50px] bg-pink-400  text-white py-2 px-4 rounded-xl hover:bg-pink-300 transition-colors duration-200"
+              className="w-full h-[50px] bg-pink-400 text-white py-2 px-4 rounded-xl hover:bg-pink-300 transition-colors duration-200"
             >
               회원 가입
             </button>

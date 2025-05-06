@@ -2,21 +2,53 @@ import { useNavigate } from 'react-router-dom';
 import CardWrapper from '../../common/card/Card';
 import { useForm } from 'react-hook-form';
 import TextField from '../../common/textField/TextField';
+import axios from 'axios';
+
+interface LoginForm {
+  email: string;
+  password: string;
+}
 
 const Login = () => {
   const navigate = useNavigate();
 
   const {
     register,
-    formState: { isSubmitting, errors },
     handleSubmit,
-  } = useForm({
+    formState: { isSubmitting, errors },
+  } = useForm<LoginForm>({
     mode: 'onChange',
-    defaultValues: { userid: '', password: '', username: '' },
+    defaultValues: { email: '', password: '' },
   });
 
+  const onSubmit = async (data: LoginForm) => {
+    try {
+      const response = await axios.post('/api/login', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      });
+
+      if (response.status === 200) {
+        localStorage.setItem('user', response.data.name);
+        alert('로그인 성공!');
+
+        navigate('/');
+      }
+    } catch (err: any) {
+      const errorData = err?.response?.data;
+
+      if (errorData?.code === 'MEMBER_ID_NOT_FOUND') {
+        alert('올바르지 않은 아이디입니다.');
+      } else {
+        alert('로그인에 실패했습니다.');
+      }
+    }
+  };
+
   return (
-    <div className="flex flex-col gap-3 w-full flex items-center justify-center ">
+    <div className="flex flex-col gap-3 w-full flex items-center justify-center">
       <div className="flex flex-row gap-2 items-center justify-center">
         <img
           src="/icon/sleepMoon.png"
@@ -30,17 +62,17 @@ const Login = () => {
       </div>
 
       <CardWrapper size="large">
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <TextField
-            id="userid"
-            register={register('userid', {
-              required: '아이디는 필수 입력 사항입니다.',
+            id="email"
+            register={register('email', {
+              required: '이메일는 필수 입력 사항입니다.',
             })}
-            placeholder="아이디를 입력하세요"
-            label="아이디"
-            error={errors.userid?.message}
+            placeholder="이메일을 입력하세요"
+            label="이메일"
+            error={errors.email?.message}
             isDisabled={isSubmitting}
-            isRequired={true}
+            isRequired
           />
 
           <TextField
@@ -59,6 +91,7 @@ const Login = () => {
             <button
               type="submit"
               className="w-full h-[50px] bg-pink-400  text-white py-2 px-4 rounded-xl hover:bg-pink-300 transition-colors duration-200"
+              disabled={isSubmitting}
             >
               로그인
             </button>

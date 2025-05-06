@@ -13,14 +13,16 @@ const Layout = () => {
   }, [location.pathname]);
 
   return (
-    <div className="w-full flex align-items flex-col justify-center">
-      <Header />
-      <main
-        className={`relative w-full h-screen md:w-1/2 md:h-screen flex flex-col  ${bgColor}`}
-      >
-        <Outlet />
+    <div className="w-full min-h-screen flex flex-col items-center bg-white-100">
+      <div className="w-full max-w-[780px] flex flex-col flex-1">
+        <Header />
+
+        <main className={`flex-1 relative w-full flex flex-col ${bgColor}`}>
+          <Outlet />
+        </main>
+
         <NavigationBar />
-      </main>
+      </div>
     </div>
   );
 };

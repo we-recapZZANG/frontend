@@ -1,25 +1,14 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Cam from '../../components/cam/Cam';
 import Motion from '../../components/cam/Motion';
-import TimeStamp from '../../components/cam/timeStamp';
-
-const timestamps = [
-  {
-    category: 'faceDown',
-    timeStamp: '03:24',
-  },
-  {
-    category: 'etc',
-    timeStamp: '04:22',
-  },
-  {
-    category: 'etc',
-    timeStamp: '05:22',
-  },
-];
+import TimeStamp from '../../components/cam/TimeStamp';
+import axios from 'axios';
+import { TimeStampEntry } from '../../type';
 
 const CamPage = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoUrl, setVideoUrl] = useState<string>('');
+  const [timestamps, setTimestamps] = useState<TimeStampEntry[]>([]);
 
   const parseTime = (time: string) => {
     const [min, sec] = time.split(':').map(Number);
@@ -29,18 +18,46 @@ const CamPage = () => {
   const handleSeek = (time: string) => {
     const seconds = parseTime(time);
 
-    console.log(time);
     if (videoRef.current) {
       videoRef.current.currentTime = seconds;
       videoRef.current.play();
     }
   };
 
+  const movingTime = timestamps?.length || 0;
+  const sleepQuality = Math.max(0, Math.min(100, (1 - movingTime / 10) * 100));
+
+  useEffect(() => {
+    const fetchVideoUrl = async () => {
+      try {
+        const response = await axios.get('/api/videos/location');
+        setVideoUrl(response.data.videoLocation);
+      } catch (error) {
+        console.error('영상 정보를 불러오는 데 실패했습니다.', error);
+      }
+    };
+
+    fetchVideoUrl();
+  }, []);
+
+  useEffect(() => {
+    const fetchTimestamps = async () => {
+      try {
+        const res = await axios.get('/api/videos');
+        setTimestamps(res.data.timeStamps);
+      } catch (error) {
+        console.error('타임스탬프 불러오기 실패', error);
+      }
+    };
+
+    fetchTimestamps();
+  }, []);
+
   return (
     <div>
-      <Cam videoRef={videoRef} />
+      <Cam videoRef={videoRef} videoUrl={videoUrl} />
       <div className="flex flex-col p-4">
-        <Motion movingTime={23} quality={80} />
+        <Motion movingTime={movingTime} quality={sleepQuality} />
       </div>
       <div className="flex flex-col p-4">
         <TimeStamp handleSeek={handleSeek} timeStamps={timestamps} />

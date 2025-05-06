@@ -10,17 +10,23 @@ const NavigationBar = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="fixed border-none rounded-t-3xl bottom-0 left-0 right-0 w-full h-20 bg-white flex justify-around items-center">
-      {navItem.map((item) => (
-        <button
-          key={item.text}
-          onClick={() => navigate(item.route)}
-          className="flex flex-col items-center justify-center"
-        >
-          <img src={item.icon} className="w-[25px] h-[25px]" alt={item.text} />
-          <p className="mt-1 text-xs text-grey-400">{item.text}</p>
-        </button>
-      ))}
+    <div className="fixed bottom-0 left-0 right-0 w-full bg-white border-none rounded-t-3xl">
+      <div className="max-w-[780px] w-full mx-auto h-20 flex justify-around items-center">
+        {navItem.map((item) => (
+          <button
+            key={item.text}
+            onClick={() => navigate(item.route)}
+            className="flex flex-col items-center justify-center"
+          >
+            <img
+              src={item.icon}
+              className="w-[25px] h-[25px]"
+              alt={item.text}
+            />
+            <p className="mt-1 text-xs text-grey-400">{item.text}</p>
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

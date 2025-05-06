@@ -9,6 +9,7 @@ import NotfoundPage from '../pages/error/NotfoundPage';
 import AuthPage from '../pages/main/AuthPage';
 import Consent from '../components/main/user/Consent';
 import CamPage from '../pages/cam/CamPage';
+import UserPage from '../pages/main/UserPage';
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,16 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <CamPage />,
+      },
+    ],
+  },
+  {
+    path: '/my',
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <UserPage />,
       },
     ],
   },

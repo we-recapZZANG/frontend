@@ -4,11 +4,13 @@ const Header = () => {
   const navigate = useNavigate();
 
   return (
-    <header
-      className="w-full h-15 flex items-center px-4 bg-pink-300 text-pink-400"
-      onClick={() => navigate('/')}
-    >
-      Logo
+    <header className="w-full h-16 flex justify-between items-center px-6 bg-pink-300 text-white shadow-md">
+      <div
+        className="text-xl text-pink-400 cursor-pointer"
+        onClick={() => navigate('/')}
+      >
+        Logo
+      </div>
     </header>
   );
 };

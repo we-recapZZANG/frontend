@@ -11,7 +11,7 @@ const UserPage = () => {
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      setUser(storedUser); // 로컬스토리지에서 user를 상태로 저장
+      setUser(JSON.parse(storedUser));
     } else {
       navigate('/user/login'); // user가 없으면 로그인 페이지로 이동
     }
@@ -35,7 +35,7 @@ const UserPage = () => {
     <div className="flex flex-col gap-6">
       <div className="w-full flex flex-col justify-center items-center bg-white h-[250px]">
         <div className="w-25 h-25 bg-stone-200 rounded-full"></div>
-        <h2 className="mt-5 flex text-title">민지</h2>
+        <h2 className="mt-5 flex text-title">{user}</h2>
       </div>
 
       <Category />

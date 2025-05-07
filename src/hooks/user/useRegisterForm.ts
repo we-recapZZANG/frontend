@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import api from '../../api/base';
+import { useNavigate } from 'react-router-dom';
 
 interface RegisterFormData {
   email: string;
@@ -11,6 +12,7 @@ interface RegisterFormData {
 export function useRegisterForm() {
   const [serverError, setServerError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const onSubmitForm = async (data: RegisterFormData): Promise<boolean> => {
     try {
@@ -21,6 +23,7 @@ export function useRegisterForm() {
       });
       if (response.status === 200) {
         setSuccessMessage('회원가입이 성공적으로 완료되었습니다!');
+        navigate('/user/login');
         return true;
       }
     } catch (error: any) {

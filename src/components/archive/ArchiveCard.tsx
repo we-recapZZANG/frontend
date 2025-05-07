@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 interface ArchiveProps {
   storyId: number;
   title: string;
@@ -10,9 +12,10 @@ interface ArchiveProps {
 const ArchiveCard = ({ story }: { story: ArchiveProps }) => {
   const imageSrc =
     story.category === '동화' ? '/icon/rabbit.png' : '/icon/heart.png';
-
+  const navigate = useNavigate();
   return (
     <div
+      onClick={() => navigate(`/archive/${story.storyId}`)}
       style={{
         boxShadow: '2px 3px 5px rgba(0, 0, 0, 0.05)',
       }}

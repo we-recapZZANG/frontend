@@ -1,12 +1,29 @@
 import DetailLayout from '../../components/layout/DetailLayout';
+import { toast } from 'react-toastify';
 
 const categories = ['동화책', '편지'];
 const category = '동화책';
 
 const EditStoryPage = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // 기본 동작 방지
+    toast.success(`저장에 성공하였습니다`, {
+      position: 'top-right',
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      theme: 'light',
+    });
+  };
+
   return (
     <DetailLayout>
-      <form onSubmit={() => {}} className="w-full flex flex-col  flex-grow">
+      <form
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+        className="w-full flex flex-col  flex-grow"
+      >
         <div className="mt-5">
           <label className="font-bold">제목</label>
           <input

@@ -41,8 +41,8 @@ const Category = () => {
   };
 
   return (
-    <div className="w-full">
-      <div className="grid grid-cols-4 gap-4">
+    <div className="w-full flex items-center justify-center">
+      <div className="w-full grid grid-cols-4 gap-4">
         {cards.map((card) => (
           <CardWrapper
             onClick={() => handleNavigate(card.route)}

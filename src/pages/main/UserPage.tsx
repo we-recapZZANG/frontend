@@ -13,12 +13,12 @@ const UserPage = () => {
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     } else {
-      navigate('/user/login'); // user가 없으면 로그인 페이지로 이동
+      // navigate('/user/login'); // user가 없으면 로그인 페이지로 이동
     }
   }, [navigate]);
 
   if (!user) {
-    return null; // user가 없으면 아무것도 렌더링하지 않음
+    //return null; // user가 없으면 아무것도 렌더링하지 않음
   }
 
   const handleLogout = async () => {
@@ -39,19 +39,23 @@ const UserPage = () => {
   return (
     <div className="flex flex-col gap-6">
       <div className="w-full flex flex-col justify-center items-center bg-white h-[250px]">
-        <div className="w-25 h-25 bg-stone-200 rounded-full"></div>
+        <div className="w-25 h-25 bg-gray-100 rounded-full"></div>
         <h2 className="mt-5 flex text-title">{user}</h2>
       </div>
 
-      <Category />
-
       <div className="m-10 flex flex-col gap-10">
-        <div className="p-6 w-full ">
+        <div className="p-6 w-full flex flex-col gap-10">
           <button
             className="w-full bg-pink-400 text-white font-semibold px-4 py-2 rounded-md hover:bg-pink-100 transition-colors duration-200"
             onClick={handleLogout}
           >
             로그아웃
+          </button>
+          <button
+            className="w-full bg-white text-gray-800  font-semibold px-4 py-2 rounded-md  transition-colors duration-200"
+            onClick={() => navigate('/')}
+          >
+            홈으로
           </button>
         </div>
         <div className="absolute bottom-0 left-0 right-0"></div>

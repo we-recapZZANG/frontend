@@ -23,7 +23,12 @@ const UserPage = () => {
 
   const handleLogout = async () => {
     try {
-      await api.post('/api/signout');
+      await api.post('/api/signout', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      });
       localStorage.removeItem('user');
       navigate('/');
     } catch (error) {

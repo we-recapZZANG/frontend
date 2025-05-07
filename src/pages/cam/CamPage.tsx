@@ -41,7 +41,12 @@ const CamPage = () => {
   useEffect(() => {
     const fetchVideoUrl = async () => {
       try {
-        const response = await api.get('/api/videos/location');
+        const response = await api.get('/api/videos/location', {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        });
         setVideoUrl(response.data.videoLocation);
       } catch (error) {
         console.error('영상 정보를 불러오는 데 실패했습니다.', error);
@@ -54,7 +59,12 @@ const CamPage = () => {
   useEffect(() => {
     const fetchTimestamps = async () => {
       try {
-        const res = await api.get('api/videos');
+        const res = await api.get('api/videos', {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        });
         setTimestamps(res.data.timeStamps);
       } catch (error) {
         console.error('타임스탬프 불러오기 실패', error);

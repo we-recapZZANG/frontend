@@ -23,11 +23,11 @@ const Cam = ({ videoRef, videoUrl, timestamps }: CamProps) => {
       const matchedTimestamp = timestamps.find(
         (timestamp) =>
           timestamp.timeStamp === currentFormatted &&
-          timestamp.category === 'facedown'
+          timestamp.category === 'faceDown'
       );
 
       if (matchedTimestamp) {
-        toast.info(`${matchedTimestamp.category}`, {
+        toast.info(`강한 움직임이 감지되었습니다!!`, {
           position: 'bottom-right',
           autoClose: 2000,
           hideProgressBar: true,

@@ -31,7 +31,9 @@ const Login = () => {
       });
 
       if (response.status === 200) {
-        localStorage.setItem('user', response.data.name);
+        localStorage.setItem('user', JSON.stringify(response.data.name));
+        console.log(JSON.stringify(response.data.name))
+
         alert('로그인 성공!');
 
         navigate('/');

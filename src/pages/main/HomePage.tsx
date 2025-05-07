@@ -9,7 +9,7 @@ const HomePage = () => {
   type CardSize = 'small' | 'medium' | 'large';
   const navigate = useNavigate();
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<string>('');
 
   const cards: { id: number; icon: string; text: string; size: CardSize }[] = [
     { id: 1, icon: './icon/mike.svg', text: '최근 녹음', size: 'medium' },
@@ -20,8 +20,10 @@ const HomePage = () => {
   //로그인 페이지는 /user/login입니다.
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    const parsedUser = storedUser?JSON.parse(storedUser) :null;
+    console.log(parsedUser);
+    if (parsedUser) {
+      setUser(parsedUser);
     } else {
       navigate('/user/login');
     }

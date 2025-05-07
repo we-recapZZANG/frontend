@@ -14,13 +14,13 @@ interface ArchiveCardProps {
 const StoryContentPage = () => {
   const navigate = useNavigate();
 
-  const open = true;
+  const open = false;
   return (
     <div className="w-full h-screen flex flex-col items-center">
       {open ? (
-        <img src="/icon/realBook.svg" alt="go" className="w-80 h-120" />
+        <img src="/icon/girlBook.svg" alt="go" className="w-80 h-120" />
       ) : (
-        <img src="/icon/StoryBook.svg" alt="go" className="w-80 h-120" />
+        <img src="/icon/girlStoryBook.svg" alt="go" className="w-80 h-120" />
       )}
       <div className="mt-4 flex flex-col items-center space-y-2 w-full">
         <button className="w-[95%] bg-pink-300 text-sm m-4 p-4 rounded-xl">

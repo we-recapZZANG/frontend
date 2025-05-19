@@ -1,8 +1,8 @@
-import { Track } from '../../type';
+import { Archive } from '../../type';
 import TrackItem from './TrackItem';
 
 interface TrackListProps {
-  tracks: Track[];
+  tracks: Archive[];
 }
 
 const TrackList = ({ tracks }: TrackListProps) => {

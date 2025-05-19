@@ -3,6 +3,10 @@ import { CurrentPlay } from '../type';
 
 interface CurrentPlayContextType {
   currentPlay: CurrentPlay | null;
+  currentTime: number;
+  currentPlayStoryId: number;
+  setCurrentTime: (time: number) => void;
+  setCurrentPlayStoryId: (id: number) => void;
   setCurrentPlay: (currentPlay: CurrentPlay) => void;
 }
 
@@ -16,9 +20,19 @@ export const CurrentPlayProvider = ({
   children: React.ReactNode;
 }) => {
   const [currentPlay, setCurrentPlay] = useState<CurrentPlay | null>(null);
-
+  const [currentTime, setCurrentTime] = useState(0);
+  const [currentPlayStoryId, setCurrentPlayStoryId] = useState(0);
   return (
-    <CurrentPlayContext.Provider value={{ currentPlay, setCurrentPlay }}>
+    <CurrentPlayContext.Provider
+      value={{
+        currentPlay,
+        currentTime,
+        currentPlayStoryId,
+        setCurrentTime,
+        setCurrentPlayStoryId,
+        setCurrentPlay,
+      }}
+    >
       {children}
     </CurrentPlayContext.Provider>
   );

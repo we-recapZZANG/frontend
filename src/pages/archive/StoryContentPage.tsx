@@ -1,8 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTrack } from '../../store/TrackContext';
 import { useCurrentPlay } from '../../store/CurrentPlayContext';
-import { CurrentPlay, Track } from '../../type';
+import { CurrentPlay, Archive } from '../../type';
 import { useArchiveDetail } from '../../hooks/archive/useGetArchive';
+import { useArchive } from '../../store/ArchiveContext';
+import { useRequestAudioBook } from '../../hooks/audioBook/useRequestAudioBook';
 
 const STORY_FILE_DATA: CurrentPlay = {
   textTitle: '작은 토끼의 모험',
@@ -11,7 +13,7 @@ const STORY_FILE_DATA: CurrentPlay = {
   voiceFileLength: '6:35',
 };
 
-const STORY_DETAIL_DATA: Track = {
+const STORY_DETAIL_DATA: Archive = {
   title: '작은 토끼의 모험',
   category: 'FAIRY_TALE',
   created_at: '05.19',
@@ -23,21 +25,38 @@ const StoryContentPage = () => {
   const navigate = useNavigate();
   const { storyId } = useParams();
   const { setTrackList } = useTrack();
-  const { setCurrentPlay } = useCurrentPlay();
-
-  // const imageSrc =
-  //   archive.category === 'FAIRY_TALE'
-  //     ? '/icon/rabbit.png'
-  //     : '/icon/heart.png';
+  const { setCurrentPlay, setCurrentPlayStoryId } = useCurrentPlay();
+  const { archiveList } = useArchive();
+  const { requestAudioBook, loading: audioLoading } = useRequestAudioBook();
 
   const NumberStoryId = Number(storyId);
-  // const { archive, loading, error } = useArchiveDetail(NumberStoryId);
+  const { archive, loading, error } = useArchiveDetail(NumberStoryId);
 
-  const handleClickPlayButton = () => {
-    setTrackList([STORY_DETAIL_DATA]);
-    setCurrentPlay(STORY_FILE_DATA);
+  const currentStory = archiveList.find(
+    (item) => item.storyId === NumberStoryId
+  );
 
-    navigate(`/play/${NumberStoryId}`);
+  const imageSrc =
+    currentStory?.category === 'FAIRY_TALE'
+      ? '/icon/rabbit.png'
+      : '/icon/heart.png';
+
+  const handleClickPlayButton = async () => {
+    if (NumberStoryId) {
+      const data = await requestAudioBook(NumberStoryId);
+      if (data) {
+        setCurrentPlay(data);
+        setCurrentPlayStoryId(NumberStoryId);
+        navigate(`/play/${NumberStoryId}`);
+      }
+      if (currentStory) {
+        setTrackList([currentStory]);
+      }
+    } else {
+      console.error('Story data not found for the given storyId:', storyId);
+    }
+
+    // setCurrentPlay(STORY_FILE_DATA);
   };
 
   const open = true;
@@ -61,12 +80,12 @@ const StoryContentPage = () => {
 
             {/* 제목 */}
             <div className="absolute top-20 text-xl font-bold text-stone-600 text-center w-full px-4">
-              {/* {archive.title} */}
+              {archive?.title}
             </div>
 
             {/* 텍스트 내용 */}
             <div className="absolute top-40 left-6 right-6 text-sm leading-relaxed text-gray-800 whitespace-pre-line px-2">
-              {/* {archive.content} */}
+              {archive?.content}
             </div>
           </>
         ) : (
@@ -79,16 +98,14 @@ const StoryContentPage = () => {
             />
             {/* 토끼 이미지 */}
             <img
-              src="/icon/rabbit.png"
+              src={imageSrc}
               alt="토끼"
               className="absolute top-24 w-24 h-24"
             />
             {/* 타이틀 */}
             <div className="absolute top-10 text-lg font-semibold text-gray-800">
-              {/* {archive.title} */}
-              성냥 팔이 소녀
+              {archive?.title}
             </div>
-            {/* 옆으로 넘기는 버튼 */}
           </>
         )}
       </div>

@@ -20,16 +20,25 @@ const HomePage = () => {
   //로그인 페이지는 /user/login입니다.
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
-    const parsedUser = storedUser?JSON.parse(storedUser) :null;
+    const parsedUser = storedUser ? JSON.parse(storedUser) : null;
     console.log(parsedUser);
     if (parsedUser) {
       setUser(parsedUser);
-    } else {
-      navigate('/user/login');
     }
+    // } else {
+    //   navigate('/user/login');
+    // }
   }, [navigate]);
 
   const sleepingTime = 7;
+
+  const handleClickCard = (cardId: number) => {
+    if (cardId === 1) {
+      navigate('/play/1');
+    } else {
+      navigate('/sleep');
+    }
+  };
 
   return (
     <div className="px-6 py-10">
@@ -39,12 +48,21 @@ const HomePage = () => {
         <div className="flex flex-row w-full gap-6">
           {cards.map((card) => (
             <CardWrapper key={card.id} size={card.size}>
-              <div className="flex flex-col gap-1 mt-4 ">
+              <div
+                className="flex flex-col gap-1 mt-4 "
+                onClick={() => handleClickCard(card.id)}
+              >
                 <img src={card.icon} width={25} height={25} alt={card.text} />
                 <p className="text-sm">{card.text}</p>
-                <span className="text-xs text-gray-400">
-                  {sleepingTime}시간째 수면 중
-                </span>
+                {card.text === '최근 녹음' ? (
+                  <span className="text-xs text-gray-400">
+                    최근 재생 보러 가기
+                  </span>
+                ) : (
+                  <span className="text-xs text-gray-400">
+                    {sleepingTime}시간째 수면 중
+                  </span>
+                )}
               </div>
             </CardWrapper>
           ))}

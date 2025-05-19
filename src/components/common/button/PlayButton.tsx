@@ -14,7 +14,9 @@ const PlayButton = ({ storyId }: PlayButtonProps) => {
   const handleClickPlayButton = async () => {
     const findStoryData = trackList.find((track) => track.storyId === storyId);
 
-    // TODO: 필요하면 findStoryData 활용
+    /**
+     * 음성 변환요청 API
+     */
     if (findStoryData) {
       const data = await requestAudioBook(findStoryData.storyId);
       if (data) {
@@ -23,9 +25,6 @@ const PlayButton = ({ storyId }: PlayButtonProps) => {
     } else {
       console.error('Story data not found for the given storyId:', storyId);
     }
-    /**
-     * TODO: storyId값으로 음성 변환 요청하기
-     */
   };
   return (
     <button

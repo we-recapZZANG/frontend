@@ -13,14 +13,6 @@ export type TimeStampEntry = {
   timeStamp: string;
 };
 
-export interface Track {
-  storyId: number;
-  title: string;
-  category: 'FAIRY_TALE' | 'LETTER';
-  created_at: string;
-  storyLength: string;
-}
-
 export interface CurrentPlay {
   textTitle: string;
   category: 'FAIRY_TALE' | 'LETTER';

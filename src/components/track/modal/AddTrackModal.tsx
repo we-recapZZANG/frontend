@@ -3,9 +3,9 @@ import { useArchive } from '../../../store/ArchiveContext';
 import AddButton from '../../common/button/AddButton';
 import clsx from 'clsx';
 import { useTrackModal } from '../../../store/TrackModalContext';
-import { Track } from '../../../type';
+import { Archive } from '../../../type';
 
-const ARCHIVE_LIST_DATA: Track[] = [
+const ARCHIVE_LIST_DATA: Archive[] = [
   {
     storyId: 1,
     title: '성냥 팔이 소녀',

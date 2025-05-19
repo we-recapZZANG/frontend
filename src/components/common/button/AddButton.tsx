@@ -1,9 +1,9 @@
 import { useTrack } from '../../../store/TrackContext';
 import { useTrackModal } from '../../../store/TrackModalContext';
-import { Track } from '../../../type';
+import { Archive } from '../../../type';
 
 interface AddButtonProps {
-  archive: Track;
+  archive: Archive;
 }
 
 const AddButton = ({ archive }: AddButtonProps) => {

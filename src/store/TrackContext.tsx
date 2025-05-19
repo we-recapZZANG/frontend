@@ -1,15 +1,15 @@
 import React, { createContext, useContext, useState } from 'react';
-import { Track } from '../type';
+import { Archive } from '../type';
 
 interface TrackContextType {
-  trackList: Track[];
-  setTrackList: React.Dispatch<React.SetStateAction<Track[]>>;
+  trackList: Archive[];
+  setTrackList: React.Dispatch<React.SetStateAction<Archive[]>>;
 }
 
 const TrackContext = createContext<TrackContextType | undefined>(undefined);
 
 export const TrackProvider = ({ children }: { children: React.ReactNode }) => {
-  const [trackList, setTrackList] = useState<Track[]>([]);
+  const [trackList, setTrackList] = useState<Archive[]>([]);
 
   return (
     <TrackContext.Provider value={{ trackList, setTrackList }}>

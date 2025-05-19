@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
-import { Track } from '../../type';
+import { Archive } from '../../type';
 import PlayButton from '../common/button/PlayButton';
 
 interface TrackItemProps {
-  track: Track;
+  track: Archive;
 }
 
 const TrackItem = ({ track }: TrackItemProps) => {

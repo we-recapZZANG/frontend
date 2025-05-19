@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type Status = 'idle' | 'recording' | 'done';
 
@@ -9,6 +11,8 @@ const VoiceRecorder = () => {
   );
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const audioChunks = useRef<Blob[]>([]);
+  const blobRef = useRef<Blob | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (status === 'recording') {
@@ -19,6 +23,7 @@ const VoiceRecorder = () => {
         };
         recorder.onstop = () => {
           const blob = new Blob(audioChunks.current, { type: 'audio/wav' });
+          blobRef.current = blob;
           setAudioUrl(URL.createObjectURL(blob));
           audioChunks.current = [];
         };
@@ -41,63 +46,130 @@ const VoiceRecorder = () => {
     } else {
       setStatus('idle');
       setAudioUrl(null);
+      blobRef.current = null;
+    }
+  };
+
+  const handleUploadAndNavigate = async () => {
+    if (!blobRef.current) return;
+
+    const formData = new FormData();
+    const file = new File([blobRef.current], 'recording.wav', {
+      type: 'audio/wav',
+    });
+    formData.append('audio', file);
+
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}:`, value);
+    }
+
+    try {
+      const response = await axios.post('/api/sample-voice', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      });
+
+      console.log('Upload successful:', response.data);
+      navigate('/');
+    } catch (error: any) {
+      console.error(
+        'Upload failed:',
+        error.response?.data?.message || error.message
+      );
     }
   };
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center bg-pink-50">
+    <div className="w-full h-screen flex flex-col justify-center items-center bg-pink">
       <div className="mb-6">
         {status === 'idle' && (
           <button
             onClick={handleClick}
-            className="w-32 h-32 rounded-full bg-pink-200 flex items-center justify-center shadow-md"
+            className="w-32 h-32 rounded-full bg-pink-300 flex items-center justify-center shadow-md"
           >
-            <img src="/icon/mic.svg" alt="mic" className="w-8 h-8" />
+            <img src="/icon/mic.svg" alt="mic" width={50} height={50} />
           </button>
         )}
 
         {status === 'recording' && (
           <button
             onClick={handleClick}
-            className="w-32 h-32 rounded-full bg-pink-100 flex items-center justify-center animate-ping"
+            className="w-20 h-20 rounded-full bg-pink-300 flex items-center justify-center animate-ping"
           >
             <div className="w-4 h-4 bg-white rounded-sm z-10" />
           </button>
         )}
 
         {status === 'done' && (
-          <button
-            onClick={handleClick}
-            className="w-32 h-32 rounded-full bg-pink-200 flex items-center justify-center"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-10 w-10 text-gray-600"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          <>
+            <button
+              onClick={handleClick}
+              className="w-32 h-32 rounded-full bg-pink-200 flex items-center justify-center"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-10 w-10 text-gray-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </button>
+
+            <div className="flex flex-col">
+              <button
+                onClick={() => {
+                  setStatus('idle');
+                  setAudioUrl(null);
+                  blobRef.current = null;
+                }}
+                className="mt-4 px-4 py-2 bg-pink-400 text-white rounded-md shadow-sm hover:bg-pink-400 transition"
+              >
+                다시 녹음하기
+              </button>
+
+              <button
+                onClick={handleUploadAndNavigate}
+                className="mt-2 px-4 py-2 bg-blue-100 text-stone-700 rounded-md shadow-sm hover:bg-blue-200 transition"
+              >
+                녹음 완료하기
+              </button>
+            </div>
+          </>
         )}
       </div>
 
       <p className="text-center text-gray-700 text-sm px-4">
         {status === 'idle' && (
-          <>
+          <span>
             녹음 버튼을 누르고
             <br />
-            “가나다라”라고 말씀해 보세요.
+            “정말 지독하게 추운 날이었어. 눈도 펑펑 내리고 어둠도 내려앉았어.”
+            <br />
+            라고 말씀해 보세요.
+          </span>
+        )}
+        {status === 'recording' && (
+          <span>
+            <br />
+            “정말 지독하게 추운 날이었어. 눈도 펑펑 내리고 어둠도 내려앉았어.”
+            <br />
+            라고 말씀해 보세요.
+          </span>
+        )}
+        {status === 'done' && (
+          <>
+            음성 파일이 녹음되었습니다. 이제 업로드하거나 다시 녹음할 수 있어요.
           </>
         )}
-        {status === 'recording' && <>“가나다라”라고 말씀해 보세요.</>}
-        {status === 'done' && <>음성 파일이 녹음되었습니다.</>}
       </p>
 
       {audioUrl && <audio controls src={audioUrl} className="mt-6" />}

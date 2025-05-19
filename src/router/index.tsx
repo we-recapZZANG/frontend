@@ -11,6 +11,7 @@ import Consent from '../components/main/user/Consent';
 import CamPage from '../pages/cam/CamPage';
 import UserPage from '../pages/main/UserPage';
 import StoryContentPage from '../pages/archive/StoryContentPage';
+import VoiceRecorder from '../pages/voice/VoicePage';
 
 export const router = createBrowserRouter([
   {
@@ -54,7 +55,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: 'archive/:id',
+    path: 'archive/:storyId',
     element: <Layout />,
     children: [
       {
@@ -65,7 +66,7 @@ export const router = createBrowserRouter([
   },
 
   {
-    path: '/archive/edit/:id',
+    path: '/archive/edit/:storyId',
     element: <EditStoryPage />,
   },
   {
@@ -87,6 +88,11 @@ export const router = createBrowserRouter([
   {
     path: 'play/:storyId',
     element: <PlayAudioBook />,
+  },
+  // voice
+  {
+    path: 'voice',
+    element: <VoiceRecorder />,
   },
 
   {

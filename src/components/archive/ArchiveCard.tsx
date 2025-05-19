@@ -1,18 +1,11 @@
 import { useNavigate } from 'react-router-dom';
+import { Archive } from '../../type';
 
-interface ArchiveProps {
-  storyId: number;
-  title: string;
-  category: '동화' | '편지';
-  storyLength: string;
-  content: string;
-  createdAt: string;
-}
-
-const ArchiveCard = ({ story }: { story: ArchiveProps }) => {
+const ArchiveCard = ({ story }: { story: Archive }) => {
   const imageSrc =
-    story.category === '동화' ? '/icon/rabbit.png' : '/icon/heart.png';
+    story.category === 'FAIRY_TALE' ? '/icon/rabbit.png' : '/icon/heart.png';
   const navigate = useNavigate();
+
   return (
     <div
       onClick={() => navigate(`/archive/${story.storyId}`)}
@@ -27,7 +20,7 @@ const ArchiveCard = ({ story }: { story: ArchiveProps }) => {
           {story.title}
         </h2>
         <p className="text-[11px] text-stone-500 font-normal">
-          {story.createdAt}
+          {story.created_at}
         </p>
         <div className="pt-3 w-full flex flex-row items-center justify-between">
           <p className="text-[10px] text-stone-400 font-normal">

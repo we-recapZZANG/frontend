@@ -1,6 +1,37 @@
-const PlayButton = () => {
+import { useTrack } from '../../../store/TrackContext';
+import { useCurrentPlay } from '../../../store/CurrentPlayContext';
+import { useRequestAudioBook } from '../../../hooks/audioBook/useRequestAudioBook';
+
+interface PlayButtonProps {
+  storyId: number;
+}
+
+const PlayButton = ({ storyId }: PlayButtonProps) => {
+  const { trackList } = useTrack();
+  const { setCurrentPlay } = useCurrentPlay();
+  const { requestAudioBook, loading } = useRequestAudioBook();
+
+  const handleClickPlayButton = async () => {
+    const findStoryData = trackList.find((track) => track.storyId === storyId);
+
+    // TODO: 필요하면 findStoryData 활용
+    if (findStoryData) {
+      const data = await requestAudioBook(findStoryData.storyId);
+      if (data) {
+        setCurrentPlay(data);
+      }
+    } else {
+      console.error('Story data not found for the given storyId:', storyId);
+    }
+    /**
+     * TODO: storyId값으로 음성 변환 요청하기
+     */
+  };
   return (
-    <button className="w-10 h-10 flex items-center justify-center pl-1 bg-pink-300 rounded-full">
+    <button
+      className="w-10 h-10 flex items-center justify-center pl-1 bg-pink-300 rounded-full"
+      onClick={handleClickPlayButton}
+    >
       <img src="/icon/play.svg" width={15} height={15} alt="audio-play" />
     </button>
   );

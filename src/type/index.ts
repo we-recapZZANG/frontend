@@ -1,10 +1,3 @@
-export type Track = {
-  title: string;
-  date: string;
-  duration: string;
-  isActive: boolean;
-};
-
 export type CardSize = 'small' | 'medium' | 'large';
 
 export interface CategoryType {
@@ -15,16 +8,30 @@ export interface CategoryType {
   route: string;
 }
 
-export type AudioBook = {
-  storyId: number;
-  title: string;
-  category: string;
-  storyLength: string;
-  content: string;
-  createdAt: string;
-};
-
 export type TimeStampEntry = {
   category: string;
   timeStamp: string;
 };
+
+export interface Track {
+  storyId: number;
+  title: string;
+  category: 'FAIRY_TALE' | 'LETTER';
+  created_at: string;
+  storyLength: string;
+}
+
+export interface CurrentPlay {
+  textTitle: string;
+  category: 'FAIRY_TALE' | 'LETTER';
+  userVoiceUrl: string;
+  voiceFileLength: string;
+}
+
+export interface Archive {
+  storyId: number;
+  title: string;
+  category: 'FAIRY_TALE' | 'LETTER';
+  storyLength: string;
+  created_at: string;
+}

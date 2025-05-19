@@ -1,14 +1,13 @@
-import { AudioBook } from '../../type';
-import PlayButton from '../common/button/PlayButton';
+import { CurrentPlay } from '../../type';
 import ProgressBar from '../main/ProgressBar';
 
 interface PlayAudioBookProps {
-  playAudioBookData: AudioBook;
+  playAudioBookData: CurrentPlay;
 }
 
 const PlayAudioBook = ({ playAudioBookData }: PlayAudioBookProps) => {
   const imageSrc =
-    playAudioBookData.category === '동화'
+    playAudioBookData.category === 'FAIRY_TALE'
       ? '/icon/rabbit.png'
       : '/icon/heart.png';
 
@@ -22,12 +21,12 @@ const PlayAudioBook = ({ playAudioBookData }: PlayAudioBookProps) => {
     >
       <div className="w-full h-[200px] flex flex-col gap-2 items-center bg-pink rounded-xl border-none ">
         <h2 className="font-semibold text-[15px] pt-3 text-stone-600">
-          {playAudioBookData.title}
+          {playAudioBookData?.textTitle}
         </h2>
         <img src={imageSrc} alt="story-cateogry" width={70} height={70} />
 
         <div className="flex flex-row gap-4">
-          <PlayButton />
+          <img />
         </div>
       </div>
       <ProgressBar />

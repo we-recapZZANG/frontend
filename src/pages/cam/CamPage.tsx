@@ -5,16 +5,16 @@ import TimeStamp from '../../components/cam/TimeStamp';
 import { TimeStampEntry } from '../../type';
 import api from '../../api/base';
 
-const timeStams = [
-  {
-    category: 'faceDown',
-    timeStamp: '00:14',
-  },
-  {
-    category: 'etc',
-    timeStamp: '04:24',
-  },
-];
+// const timeStams = [
+//   {
+//     category: 'faceDown',
+//     timeStamp: '00:14',
+//   },
+//   {
+//     category: 'etc',
+//     timeStamp: '04:24',
+//   },
+// ];
 
 const CamPage = () => {
   const videoRef = useRef<HTMLVideoElement>(null);

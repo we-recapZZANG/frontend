@@ -1,0 +1,27 @@
+import React, { createContext, useContext, useState } from 'react';
+import { Track } from '../type';
+
+interface TrackContextType {
+  trackList: Track[];
+  setTrackList: React.Dispatch<React.SetStateAction<Track[]>>;
+}
+
+const TrackContext = createContext<TrackContextType | undefined>(undefined);
+
+export const TrackProvider = ({ children }: { children: React.ReactNode }) => {
+  const [trackList, setTrackList] = useState<Track[]>([]);
+
+  return (
+    <TrackContext.Provider value={{ trackList, setTrackList }}>
+      {children}
+    </TrackContext.Provider>
+  );
+};
+
+export const useTrack = () => {
+  const context = useContext(TrackContext);
+  if (!context) {
+    throw new Error('useTrack must be used within a TrackProvider');
+  }
+  return context;
+};

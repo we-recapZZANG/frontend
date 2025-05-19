@@ -1,33 +1,35 @@
+import { useParams } from 'react-router-dom';
 import { Track } from '../../type';
-import AddButton from '../common/button/AddButton';
 import PlayButton from '../common/button/PlayButton';
 
 interface TrackItemProps {
   track: Track;
-  popAddTrack: boolean;
 }
 
-const TrackItem = ({ track, popAddTrack }: TrackItemProps) => {
+const TrackItem = ({ track }: TrackItemProps) => {
+  const { storyId } = useParams();
+  const numberStoryId = Number(storyId);
+
   return (
     <div
       key={track.title}
-      className={`flex items-center justify-between p-4 rounded-2xl shadow-sm ${
-        track.isActive ? 'bg-white' : 'bg-[#FFF3F3]'
+      className={`flex items-center  justify-between p-4 rounded-2xl shadow-sm ${
+        track.storyId === numberStoryId ? 'bg-white' : 'bg-[#FFF3F3]'
       }`}
     >
-      <div>
+      <div className="flex flex-col gap-1">
         <h3
           className={`font-semibold text-sm ${
-            track.isActive ? 'text-black' : 'text-stone-500'
+            track.storyId === numberStoryId ? 'text-black' : 'text-stone-500'
           }`}
         >
           {track.title}
         </h3>
-        <p className="text-xs text-stone-400">{track.date}</p>
-        <p className="text-xs text-stone-400 mt-1">{track.duration}</p>
+        <p className="text-[13px] text-stone-500">{track.created_at}생성</p>
+        <p className="text-xs text-stone-400">{track.storyLength}</p>
       </div>
 
-      {popAddTrack ? <PlayButton /> : <AddButton />}
+      <PlayButton storyId={track.storyId} />
     </div>
   );
 };

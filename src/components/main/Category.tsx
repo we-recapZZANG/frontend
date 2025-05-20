@@ -29,7 +29,7 @@ const cards: CategoryType[] = [
     icon: '/icon/setting.png',
     text: '설정',
     size: 'small',
-    route: '/settings',
+    route: '/my',
   },
 ];
 

@@ -1,26 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTrack } from '../../store/TrackContext';
 import { useCurrentPlay } from '../../store/CurrentPlayContext';
-import { CurrentPlay, Archive } from '../../type';
 import { useArchiveDetail } from '../../hooks/archive/useGetArchive';
 import { useArchive } from '../../store/ArchiveContext';
 import { useRequestAudioBook } from '../../hooks/audioBook/useRequestAudioBook';
-import { useState } from 'react';
-
-// const STORY_FILE_DATA: CurrentPlay = {
-//   textTitle: '작은 토끼의 모험',
-//   category: 'FAIRY_TALE',
-//   userVoiceUrl: 'https://storage.example.com/voice/12345.wav',
-//   voiceFileLength: '6:35',
-// };
-
-// const STORY_DETAIL_DATA: Archive = {
-//   title: '작은 토끼의 모험',
-//   category: 'FAIRY_TALE',
-//   created_at: '05.19',
-//   storyId: 1,
-//   storyLength: '04:00',
-// };
+import { useState, useMemo } from 'react';
 
 const StoryContentPage = () => {
   const navigate = useNavigate();
@@ -31,6 +15,8 @@ const StoryContentPage = () => {
   const { requestAudioBook, loading: audioLoading } = useRequestAudioBook();
 
   const [isOpen, setIsOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+
   const NumberStoryId = Number(storyId);
   const { archive, loading, error } = useArchiveDetail(NumberStoryId);
 
@@ -57,14 +43,19 @@ const StoryContentPage = () => {
     } else {
       console.error('Story data not found for the given storyId:', storyId);
     }
-
-    // setCurrentPlay(STORY_FILE_DATA);
   };
 
-  /**
-   * TODO1: 동화책 표지 UI만들기
-   * TODO2: 동화책 속 UI 만들기
-   */
+  const contentPages = useMemo(() => {
+    if (!archive?.content) return [];
+    const pages = [];
+    for (let i = 0; i < archive.content.length; i += 100) {
+      pages.push(archive.content.slice(i, i + 100));
+    }
+    return pages;
+  }, [archive?.content]);
+
+  const totalPages = contentPages.length;
+
   return (
     <div className="w-full h-screen flex flex-col items-center">
       <div className="relative w-80 h-[480px] flex justify-center items-center">
@@ -82,10 +73,45 @@ const StoryContentPage = () => {
               {archive?.title}
             </div>
 
-            {/* 텍스트 내용 */}
+            {/* 텍스트 내용 (페이지별) */}
             <div className="absolute top-40 left-6 right-6 text-sm leading-relaxed text-gray-800 whitespace-pre-line px-2">
-              {archive?.content}
+              {contentPages[currentPage]}
             </div>
+
+            {/* 페이지 번호 */}
+            <div className="absolute bottom-12 text-xs text-gray-500">
+              {currentPage + 1} / {totalPages}
+            </div>
+
+            {/* 이전 페이지 버튼 */}
+            {currentPage > 0 && (
+              <button
+                className="absolute top-96 left-5"
+                onClick={() => setCurrentPage((prev) => prev - 1)}
+              >
+                <img
+                  src="/icon/prev-page.svg"
+                  width={18}
+                  height={10}
+                  alt="이전 페이지"
+                />
+              </button>
+            )}
+
+            {/* 다음 페이지 버튼 */}
+            {currentPage < totalPages - 1 && (
+              <button
+                className="absolute top-96 right-2"
+                onClick={() => setCurrentPage((prev) => prev + 1)}
+              >
+                <img
+                  src="/icon/next-page.svg"
+                  width={18}
+                  height={10}
+                  alt="다음 페이지"
+                />
+              </button>
+            )}
           </>
         ) : (
           <>
@@ -95,16 +121,28 @@ const StoryContentPage = () => {
               alt="책 표지"
               className="w-full h-full"
             />
-            {/* 토끼 이미지 */}
+            {/* 토끼 or 하트 이미지 */}
             <img
               src={imageSrc}
-              alt="토끼"
-              className="absolute top-24 w-24 h-24"
+              alt="동화 카테고리"
+              className="absolute top-45 w-30 h-30"
             />
             {/* 타이틀 */}
-            <div className="absolute top-10 text-lg font-semibold text-gray-800">
+            <div className="absolute top-40 text-lg font-semibold text-gray-800">
               {archive?.title}
             </div>
+
+            <button
+              className="absolute top-94 right-7"
+              onClick={() => setIsOpen(true)}
+            >
+              <img
+                src="/icon/book-arrow.svg"
+                width={18}
+                height={10}
+                alt="열기"
+              />
+            </button>
           </>
         )}
       </div>

@@ -25,9 +25,17 @@ const CurrentAudio = () => {
 
   if (!currentPlay)
     return (
-      <p className="w-full flex justify-center h-50 items-center text-stone-500">
-        재생 중인 오디오 없음
-      </p>
+      <div className="flex flex-col justify-center items-center h-60">
+        <p className="w-full flex justify-center h-20 items-center text-stone-400">
+          재생 중인 오디오가 존재하지 않습니다!
+        </p>
+        <button
+          className="w-45 flex justify-center bg-blue-200 text-gray-800  font-semibold px-4 py-2 rounded-md  transition-colors duration-200"
+          onClick={() => navigate('/archive')}
+        >
+          스토리 둘러보러 가기
+        </button>
+      </div>
     );
 
   const { voiceFileLength, textTitle } = currentPlay;

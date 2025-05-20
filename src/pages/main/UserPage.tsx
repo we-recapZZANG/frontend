@@ -40,7 +40,9 @@ const UserPage = () => {
     <div className="flex flex-col gap-6">
       <div className="w-full flex flex-col justify-center items-center bg-white h-[250px]">
         <div className="w-25 h-25 bg-gray-100 rounded-full"></div>
-        <h2 className="mt-5 flex text-title">{user}</h2>
+        <h2 className="mt-5 flex text-title">
+          {user ? user : '사용자 정보 없음'}
+        </h2>
       </div>
 
       <div className="m-10 flex flex-col gap-10">
@@ -57,6 +59,9 @@ const UserPage = () => {
           >
             홈으로
           </button>
+        </div>
+        <div className="w-full text-gray-800  font-semibold px-4 py-2 rounded-md  transition-colors duration-200">
+          <h3>실시간 영상 설정</h3>
         </div>
         <div className="absolute bottom-0 left-0 right-0"></div>
       </div>

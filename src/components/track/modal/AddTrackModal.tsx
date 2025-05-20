@@ -2,6 +2,7 @@ import { useArchive } from '../../../store/ArchiveContext';
 import AddButton from '../../common/button/AddButton';
 import clsx from 'clsx';
 import { useTrackModal } from '../../../store/TrackModalContext';
+
 // import { Archive } from '../../../type';
 
 // const ARCHIVE_LIST_DATA: Archive[] = [
@@ -42,6 +43,7 @@ const AddTrackList = () => {
         트랙 추가
       </h2>
       <div className="flex flex-col gap-3 max-h-[42vh] overflow-y-auto pr-1">
+        {!archiveList}
         {archiveList.map((archive) => (
           <div
             key={archive.storyId}

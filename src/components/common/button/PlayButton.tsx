@@ -14,7 +14,7 @@ const PlayButton = ({ storyId }: PlayButtonProps) => {
   const handleClickPlayButton = async () => {
     const findStoryData = trackList.find((track) => track.storyId === storyId);
 
-    /**
+    /*
      * 음성 변환요청 API
      */
     if (findStoryData) {

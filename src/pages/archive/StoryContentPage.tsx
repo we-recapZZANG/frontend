@@ -5,21 +5,22 @@ import { CurrentPlay, Archive } from '../../type';
 import { useArchiveDetail } from '../../hooks/archive/useGetArchive';
 import { useArchive } from '../../store/ArchiveContext';
 import { useRequestAudioBook } from '../../hooks/audioBook/useRequestAudioBook';
+import { useState } from 'react';
 
-const STORY_FILE_DATA: CurrentPlay = {
-  textTitle: '작은 토끼의 모험',
-  category: 'FAIRY_TALE',
-  userVoiceUrl: 'https://storage.example.com/voice/12345.wav',
-  voiceFileLength: '6:35',
-};
+// const STORY_FILE_DATA: CurrentPlay = {
+//   textTitle: '작은 토끼의 모험',
+//   category: 'FAIRY_TALE',
+//   userVoiceUrl: 'https://storage.example.com/voice/12345.wav',
+//   voiceFileLength: '6:35',
+// };
 
-const STORY_DETAIL_DATA: Archive = {
-  title: '작은 토끼의 모험',
-  category: 'FAIRY_TALE',
-  created_at: '05.19',
-  storyId: 1,
-  storyLength: '04:00',
-};
+// const STORY_DETAIL_DATA: Archive = {
+//   title: '작은 토끼의 모험',
+//   category: 'FAIRY_TALE',
+//   created_at: '05.19',
+//   storyId: 1,
+//   storyLength: '04:00',
+// };
 
 const StoryContentPage = () => {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ const StoryContentPage = () => {
   const { archiveList } = useArchive();
   const { requestAudioBook, loading: audioLoading } = useRequestAudioBook();
 
+  const [isOpen, setIsOpen] = useState(false);
   const NumberStoryId = Number(storyId);
   const { archive, loading, error } = useArchiveDetail(NumberStoryId);
 
@@ -59,17 +61,14 @@ const StoryContentPage = () => {
     // setCurrentPlay(STORY_FILE_DATA);
   };
 
-  const open = true;
-
   /**
    * TODO1: 동화책 표지 UI만들기
    * TODO2: 동화책 속 UI 만들기
    */
-
   return (
     <div className="w-full h-screen flex flex-col items-center">
       <div className="relative w-80 h-[480px] flex justify-center items-center">
-        {open ? (
+        {isOpen ? (
           <>
             {/* 속지 이미지 */}
             <img

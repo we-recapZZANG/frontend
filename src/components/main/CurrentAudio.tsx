@@ -22,6 +22,7 @@ const parseTimeStringToSeconds = (timeString: string): number => {
 const CurrentAudio = () => {
   const { currentPlay, currentTime } = useCurrentPlay();
   const navigate = useNavigate();
+
   if (!currentPlay)
     return (
       <p className="w-full flex justify-center h-50 items-center text-stone-500">

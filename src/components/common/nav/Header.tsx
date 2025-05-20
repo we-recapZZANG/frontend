@@ -9,7 +9,7 @@ const Header = () => {
         className="text-xl text-pink-400 cursor-pointer"
         onClick={() => navigate('/')}
       >
-        Logo
+        <img src="/icon/logo.png" width={40} height={50} />
       </div>
     </header>
   );

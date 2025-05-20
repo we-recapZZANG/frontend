@@ -30,7 +30,7 @@ const HomePage = () => {
     // }
   }, [navigate]);
 
-  const sleepingTime = 7;
+  const sleepingTime = 0;
 
   const handleClickCard = (cardId: number) => {
     if (cardId === 1) {

@@ -1,34 +1,29 @@
-import { useEffect } from 'react';
 import { useArchive } from '../../../store/ArchiveContext';
 import AddButton from '../../common/button/AddButton';
 import clsx from 'clsx';
 import { useTrackModal } from '../../../store/TrackModalContext';
-import { Archive } from '../../../type';
+// import { Archive } from '../../../type';
 
-const ARCHIVE_LIST_DATA: Archive[] = [
-  {
-    storyId: 1,
-    title: '성냥 팔이 소녀',
-    category: 'FAIRY_TALE',
-    storyLength: '00:00',
-    created_at: '5월 7일',
-  },
-  {
-    storyId: 2,
-    title: '테스트 제목',
-    category: 'LETTER',
-    storyLength: '00:00',
-    created_at: '5월 7일',
-  },
-];
+// const ARCHIVE_LIST_DATA: Archive[] = [
+//   {
+//     storyId: 1,
+//     title: '성냥 팔이 소녀',
+//     category: 'FAIRY_TALE',
+//     storyLength: '00:00',
+//     created_at: '5월 7일',
+//   },
+//   {
+//     storyId: 2,
+//     title: '테스트 제목',
+//     category: 'LETTER',
+//     storyLength: '00:00',
+//     created_at: '5월 7일',
+//   },
+// ];
 
 const AddTrackList = () => {
-  const { archiveList, setArchiveList } = useArchive();
+  const { archiveList } = useArchive();
   const { isOpen, setIsOpen } = useTrackModal();
-
-  useEffect(() => {
-    setArchiveList(ARCHIVE_LIST_DATA);
-  }, []);
 
   return (
     <div

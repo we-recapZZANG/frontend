@@ -1,7 +1,11 @@
+// src/api/authenticatedApi.ts (세션 필요할 때)
 import axios from 'axios';
 
-const api = axios.create({
+export const authenticatedApi = axios.create({
   baseURL: 'http://localhost:8080',
+  withCredentials: true,
 });
 
-export default api;
+export const publicApi = axios.create({
+  baseURL: 'http://localhost:8080',
+});

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import DetailLayout from '../../components/layout/DetailLayout';
 import { toast } from 'react-toastify';
-import api from '../../api/base';
+import { authenticatedApi } from '../../api/base';
 import { useNavigate } from 'react-router-dom';
 
 const categories = ['동화책', '편지'];
@@ -22,17 +22,11 @@ const EditStoryPage = () => {
     };
 
     try {
-      await api.post(
-        '/api/archive',
-        {
-          title,
-          content,
-          category: categoryMap[category],
-        },
-        {
-          withCredentials: true,
-        }
-      );
+      await authenticatedApi.post('/api/archive', {
+        title,
+        content,
+        category: categoryMap[category],
+      });
 
       toast.success('저장에 성공하였습니다', {
         position: 'top-right',

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CurrentPlay } from '../../type';
-import api from '../../api/base';
+import { authenticatedApi } from '../../api/base';
 
 export const useRequestAudioBook = () => {
   const [data, setData] = useState<CurrentPlay | null>(null);
@@ -11,10 +11,11 @@ export const useRequestAudioBook = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await api.post<CurrentPlay>(
+      const response = await authenticatedApi.post<CurrentPlay>(
         '/api/voice-book/play',
-        { storyId },
-        { withCredentials: true }
+        {
+          storyId,
+        }
       );
       setData(response.data);
       return response.data;

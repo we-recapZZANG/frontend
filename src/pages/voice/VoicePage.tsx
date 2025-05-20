@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../../api/base';
+import { authenticatedApi } from '../../api/base';
 
 type Status = 'idle' | 'recording' | 'done';
 
@@ -64,12 +64,15 @@ const VoiceRecorder = () => {
     }
 
     try {
-      const response = await api.post('/api/sample-voice', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        withCredentials: true,
-      });
+      const response = await authenticatedApi.post(
+        '/api/sample-voice',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
 
       console.log('Upload successful:', response.data);
       navigate('/');

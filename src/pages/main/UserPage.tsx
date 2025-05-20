@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Category from '../../components/main/Category';
 import { useEffect, useState } from 'react';
-import api from '../../api/base';
+import { authenticatedApi } from '../../api/base';
 
 const UserPage = () => {
   const navigate = useNavigate();
@@ -23,11 +23,10 @@ const UserPage = () => {
 
   const handleLogout = async () => {
     try {
-      await api.post('/api/signout', {
+      await authenticatedApi.post('/api/signout', {
         headers: {
           'Content-Type': 'application/json',
         },
-        withCredentials: true,
       });
       localStorage.removeItem('user');
       navigate('/');

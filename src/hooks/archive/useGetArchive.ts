@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import api from '../../api/base';
+import { authenticatedApi } from '../../api/base';
 import axios from 'axios';
 
 interface ArchiveDetail {
@@ -23,9 +23,9 @@ export function useArchiveDetail(storyId: number) {
     setError(null);
 
     try {
-      const response = await api.get<ArchiveDetail>(`/api/archive/${storyId}`, {
-        withCredentials: true,
-      });
+      const response = await authenticatedApi.get<ArchiveDetail>(
+        `/api/archive/${storyId}`
+      );
 
       if (response.status === 200) {
         setArchive(response.data);

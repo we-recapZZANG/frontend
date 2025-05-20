@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import api from '../../api/base';
+import { authenticatedApi } from '../../api/base';
 import { Archive } from '../../type';
 
 interface ArchivesResponse {
@@ -22,9 +22,9 @@ export function useArchives() {
     setError(null);
 
     try {
-      const response = await api.get<ArchivesResponse>('/api/archive', {
-        withCredentials: true,
-      });
+      const response = await authenticatedApi.get<ArchivesResponse>(
+        '/api/archive'
+      );
       if (response.status === 200) {
         setArchives(response.data.archives);
       }

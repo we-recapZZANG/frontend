@@ -3,7 +3,7 @@ import Cam from '../../components/cam/Cam';
 import Motion from '../../components/cam/Motion';
 import TimeStamp from '../../components/cam/TimeStamp';
 import { TimeStampEntry } from '../../type';
-import api from '../../api/base';
+import { authenticatedApi } from '../../api/base';
 
 // const timeStams = [
 //   {
@@ -41,11 +41,10 @@ const CamPage = () => {
   useEffect(() => {
     const fetchVideoUrl = async () => {
       try {
-        const response = await api.get('/api/videos/location', {
+        const response = await authenticatedApi.get('/api/videos/location', {
           headers: {
             'Content-Type': 'application/json',
           },
-          withCredentials: true,
         });
         setVideoUrl(response.data.videoLocation);
       } catch (error) {
@@ -59,11 +58,10 @@ const CamPage = () => {
   useEffect(() => {
     const fetchTimestamps = async () => {
       try {
-        const res = await api.get('api/videos', {
+        const res = await authenticatedApi.get('api/videos', {
           headers: {
             'Content-Type': 'application/json',
           },
-          withCredentials: true,
         });
         setTimestamps(res.data.timeStamps);
       } catch (error) {

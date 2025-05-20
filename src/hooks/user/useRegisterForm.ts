@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import api from '../../api/base';
+import { publicApi } from '../../api/base';
 import { useNavigate } from 'react-router-dom';
 
 interface RegisterFormData {
@@ -16,7 +16,7 @@ export function useRegisterForm() {
 
   const onSubmitForm = async (data: RegisterFormData): Promise<boolean> => {
     try {
-      const response = await api.post('/api/signup', {
+      const response = await publicApi.post('/api/signup', {
         email: data.email,
         name: data.name,
         password: data.password,

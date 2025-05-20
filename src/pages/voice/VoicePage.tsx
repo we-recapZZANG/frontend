@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from '../../api/base';
 
 type Status = 'idle' | 'recording' | 'done';
 
@@ -64,7 +64,7 @@ const VoiceRecorder = () => {
     }
 
     try {
-      const response = await axios.post('/api/sample-voice', formData, {
+      const response = await api.post('/api/sample-voice', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { CurrentPlay } from '../type';
 
 interface CurrentPlayContextType {
@@ -14,14 +14,35 @@ const CurrentPlayContext = createContext<CurrentPlayContextType | undefined>(
   undefined
 );
 
+const getInitialCurrentPlay = (): CurrentPlay | null => {
+  try {
+    const stored = localStorage.getItem('currentPlay');
+    return stored ? JSON.parse(stored) : null;
+  } catch (e) {
+    console.error('Failed to load currentPlay from localStorage:', e);
+    return null;
+  }
+};
+
 export const CurrentPlayProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [currentPlay, setCurrentPlay] = useState<CurrentPlay | null>(null);
+  const [currentPlay, setCurrentPlay] = useState<CurrentPlay | null>(
+    getInitialCurrentPlay
+  );
+
   const [currentTime, setCurrentTime] = useState(0);
   const [currentPlayStoryId, setCurrentPlayStoryId] = useState(0);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('currentPlay', JSON.stringify(currentPlay));
+    } catch (e) {
+      console.error('Failed to save currentPlay to localStorage:', e);
+    }
+  }, [currentPlay]);
   return (
     <CurrentPlayContext.Provider
       value={{

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { CurrentPlay } from '../../type';
+import api from '../../api/base';
 
 export const useRequestAudioBook = () => {
   const [data, setData] = useState<CurrentPlay | null>(null);
@@ -11,7 +11,7 @@ export const useRequestAudioBook = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post<CurrentPlay>(
+      const response = await api.post<CurrentPlay>(
         '/api/voice-book/play',
         { storyId },
         { withCredentials: true }

@@ -23,8 +23,8 @@ export default ({ mode }: ConfigEnv) => {
       key: fs.readFileSync(path.resolve(__dirname, 'localhost+1-key.pem')),
       cert: fs.readFileSync(path.resolve(__dirname, 'localhost+1.pem')),
     }, 
-      host:true,
-      port:5173
+    host:true,
+    port:5173
 
   },
   });

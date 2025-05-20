@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import CardWrapper from '../../common/card/Card';
 import { useForm } from 'react-hook-form';
 import TextField from '../../common/textField/TextField';
-import { publicApi } from '../../../api/base';
+import { authenticatedApi, publicApi } from '../../../api/base';
 
 interface LoginForm {
   email: string;
@@ -23,7 +23,7 @@ const Login = () => {
 
   const onSubmit = async (data: LoginForm) => {
     try {
-      const response = await publicApi.post('/api/login', data, {
+      const response = await authenticatedApi.post('/api/login', data, {
         headers: {
           'Content-Type': 'application/json',
         },

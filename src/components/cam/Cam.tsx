@@ -10,7 +10,7 @@ interface CamProps {
 
 const Cam = ({ videoRef, videoUrl, timestamps }: CamProps) => {
   if (!videoUrl) {
-    return <div>영상을 받아올 수 없습니다.</div>;
+    return <div className="w-full h-[300px] bg-black" />;
   }
 
   useEffect(() => {

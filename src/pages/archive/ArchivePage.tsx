@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import ArchiveCard from '../../components/archive/ArchiveCard';
 import { useArchive } from '../../store/ArchiveContext';
 import { useArchives } from '../../hooks/archive/useGetArchiveList';
+import { useEffect } from 'react';
 
 const ARCHIVE_LIST_DATA: {
   storyId: number;
@@ -29,6 +30,11 @@ const ARCHIVE_LIST_DATA: {
 const ArchivePage = () => {
   const navigate = useNavigate();
   const { archives, loading, error, refetch } = useArchives();
+  const { setArchiveList } = useArchive();
+
+  useEffect(() => {
+    setArchiveList(archives);
+  }, [archives]);
 
   return (
     <div className="px-6 py-10">

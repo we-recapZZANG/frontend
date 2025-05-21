@@ -37,6 +37,7 @@ const StoryContentPage = () => {
         setCurrentPlayStoryId(NumberStoryId);
         navigate(`/play/${NumberStoryId}`);
       }
+
       if (currentStory) {
         setTrackList([currentStory]);
       }

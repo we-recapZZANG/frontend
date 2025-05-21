@@ -2,10 +2,10 @@
 import axios from 'axios';
 
 export const authenticatedApi = axios.create({
-  baseURL: 'https://172.16.28.151:8443',
+  baseURL: 'https://192.0.0.2:8443',
   withCredentials: true,
 });
 
 export const publicApi = axios.create({
-  baseURL: 'https://172.16.28.151:8443',
+  baseURL: 'https://192.0.0.2:8443',
 });

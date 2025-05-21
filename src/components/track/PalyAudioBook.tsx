@@ -9,9 +9,9 @@ interface PlayAudioBookProps {
 
 /**
  * 완뇨
- */
-const audioUrl =
-  'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+//  */
+// const audioUrl =
+//   'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
 
 const PlayAudioBook = ({ playAudioBookData }: PlayAudioBookProps) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -55,25 +55,37 @@ const PlayAudioBook = ({ playAudioBookData }: PlayAudioBookProps) => {
     setIsPlaying(false);
   };
 
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
+useEffect(() => {
+  const audio = audioRef.current;
+  if (!audio) return;
 
-    const updateTime = () => {
-      setCurrentTime(audio.currentTime);
-      setDuration(audio.duration || 0);
-    };
+  const updateTime = () => {
+    setCurrentTime(audio.currentTime);
+    setDuration(audio.duration || 0);
+  };
 
-    audio.addEventListener('timeupdate', updateTime);
-    audio.addEventListener('loadedmetadata', updateTime);
-    audio.addEventListener('ended', () => setIsPlaying(false));
+  audio.addEventListener('timeupdate', updateTime);
+  audio.addEventListener('loadedmetadata', updateTime);
+  audio.addEventListener('ended', () => setIsPlaying(false));
 
-    return () => {
-      audio.removeEventListener('timeupdate', updateTime);
-      audio.removeEventListener('loadedmetadata', updateTime);
-      audio.removeEventListener('ended', () => setIsPlaying(false));
-    };
-  }, [setCurrentTime]);
+  const playAudio = async () => {
+    try {
+      await audio.play();
+      setIsPlaying(true);
+      setCurrentPlay(playAudioBookData);
+    } catch (err) {
+      console.error('자동 재생 실패:', err);
+    }
+  };
+
+  playAudio();
+
+  return () => {
+    audio.removeEventListener('timeupdate', updateTime);
+    audio.removeEventListener('loadedmetadata', updateTime);
+    audio.removeEventListener('ended', () => setIsPlaying(false));
+  };
+}, [setCurrentTime, setCurrentPlay, playAudioBookData]);
 
   return (
     <div
@@ -117,7 +129,7 @@ const PlayAudioBook = ({ playAudioBookData }: PlayAudioBookProps) => {
         <p>{formatTime(duration)}</p>
       </div>
 
-      <audio ref={audioRef} src={audioUrl} />
+      <audio ref={audioRef} src={playAudioBookData.userVoiceUrl} />
     </div>
   );
 };

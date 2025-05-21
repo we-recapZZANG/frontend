@@ -19,6 +19,8 @@ export const useRequestAudioBook = () => {
       );
       setData(response.data);
 
+      console.log(response.data);
+
       return response.data;
     } catch (err: any) {
       setError(err.response?.data?.message || '오디오북 요청 중 오류 발생');

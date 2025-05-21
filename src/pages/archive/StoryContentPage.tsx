@@ -24,6 +24,9 @@ const StoryContentPage = () => {
     (item) => item.storyId === NumberStoryId
   );
 
+  console.log('archiveList',archiveList, NumberStoryId)
+
+
   const imageSrc =
     currentStory?.category === 'FAIRY_TALE'
       ? '/icon/rabbit.png'
@@ -37,7 +40,6 @@ const StoryContentPage = () => {
         setCurrentPlayStoryId(NumberStoryId);
         navigate(`/play/${NumberStoryId}`);
       }
-
       if (currentStory) {
         setTrackList([currentStory]);
       }

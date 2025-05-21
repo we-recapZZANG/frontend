@@ -59,9 +59,7 @@ const UserPage = () => {
             홈으로
           </button>
         </div>
-        <div className="w-full text-gray-800  font-semibold px-4 py-2 rounded-md  transition-colors duration-200">
-          <h3>실시간 영상 설정</h3>
-        </div>
+        <div className="w-full text-gray-800  font-semibold px-4 py-2 rounded-md  transition-colors duration-200"></div>
         <div className="absolute bottom-0 left-0 right-0"></div>
       </div>
     </div>

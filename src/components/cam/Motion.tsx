@@ -14,8 +14,7 @@ const Motion = ({ movingTime, quality }: MotionProps) => {
         </div>
         <div className="p-2 w-[45%] bg-stone-100 border-none rounded-lg">
           <p className="text-description">수면 품질</p>
-          <p className="text-md font-bold ">{quality}%</p>
-        </div>
+<p className="text-md font-bold ">{quality.toFixed(2)}%</p>        </div>
       </div>
     </div>
   );

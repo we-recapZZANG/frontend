@@ -3,6 +3,7 @@ import CardWrapper from '../../common/card/Card';
 import { Checkbox } from '../../components/ui/checkbox';
 import TextField from '../../common/textField/TextField';
 import { useRegisterForm } from '../../../hooks/user/useRegisterForm';
+import { useNavigate } from 'react-router-dom';
 
 type FormValues = {
   email: string;
@@ -25,7 +26,11 @@ const SignUp = () => {
 
   const handleRegister = async (data: FormValues) => {
     const isSuccess = await onSubmitForm(data);
-    if (isSuccess) reset();
+
+    if (isSuccess) {
+      reset();
+      
+    }
   };
 
   return (

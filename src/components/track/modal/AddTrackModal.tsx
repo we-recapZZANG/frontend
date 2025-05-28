@@ -49,12 +49,11 @@ const AddTrackList = () => {
             key={archive.storyId}
             className="flex items-center justify-between rounded-2xl bg-white px-4 py-3 shadow-sm"
           >
-            <div className="flex flex-col text-left">
+            <div className="flex flex-col items-center justify-center h-10 text-left">
               <h3 className="text-sm font-semibold text-gray-800">
                 {archive.title}
               </h3>
-              <p className="text-xs text-gray-400">{archive.created_at}</p>
-              <p className="text-xs text-gray-400">{archive.storyLength}</p>
+          
             </div>
             <AddButton archive={archive} />
           </div>

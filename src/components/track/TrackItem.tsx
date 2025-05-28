@@ -7,7 +7,7 @@ interface TrackItemProps {
 }
 
 const TrackItem = ({ track }: TrackItemProps) => {
-  const { currentPlayStoryId, currentPlay } = useCurrentPlay();
+  const {  currentPlay } = useCurrentPlay();
   const isSelected = track.storyId === Number(currentPlay?.storyId);
 
   return (
@@ -18,11 +18,9 @@ const TrackItem = ({ track }: TrackItemProps) => {
       }`}
     >
       <div className="flex flex-col gap-1">
-        <h3 className={`font-semibold text-sm ${isSelected ? 'text-black' : 'text-stone-500'}`}>
+        <h2 className={`font-semibold text-md ${isSelected ? 'text-black' : 'text-stone-500'}`}>
           {track.title}
-        </h3>
-        <p className="text-[13px] text-stone-500">{track.created_at} 생성</p>
-        <p className="text-xs text-stone-400">{track.storyLength}</p>
+        </h2>
       </div>
 
       <PlayButton storyId={track.storyId} />

@@ -24,7 +24,7 @@ const ArchiveCard = ({ story }: { story: Archive }) => {
         </p>
         <div className="pt-3 w-full flex flex-row items-center justify-between">
           <p className="text-[10px] text-stone-400 font-normal">
-            {story.storyLength}
+            {story.storyLength ? story.storyLength : "00:00"}
           </p>
         </div>
       </div>

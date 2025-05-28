@@ -1,6 +1,7 @@
 import { useTrack } from '../../../store/TrackContext';
 import { useCurrentPlay } from '../../../store/CurrentPlayContext';
 import { useRequestAudioBook } from '../../../hooks/audioBook/useRequestAudioBook';
+import { useNavigate } from 'react-router-dom';
 
 interface PlayButtonProps {
   storyId: number;
@@ -10,6 +11,7 @@ const PlayButton = ({ storyId }: PlayButtonProps) => {
   const { trackList } = useTrack();
   const { setCurrentPlay } = useCurrentPlay();
   const { requestAudioBook, loading } = useRequestAudioBook();
+  const navigate = useNavigate();
 
   const handleClickPlayButton = async () => {
     const findStoryData = trackList.find((track) => track.storyId === storyId);
@@ -22,6 +24,7 @@ const PlayButton = ({ storyId }: PlayButtonProps) => {
       if (data) {
         setCurrentPlay(data);
       }
+      navigate(`/play/${storyId}`)
     } else {
       console.error('Story data not found for the given storyId:', storyId);
     }

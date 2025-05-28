@@ -2,10 +2,12 @@ import { useNavigate } from 'react-router-dom';
 import Category from '../../components/main/Category';
 import { useEffect, useState } from 'react';
 import { authenticatedApi } from '../../api/base';
+import { useCurrentPlay } from '../../store/CurrentPlayContext';
 
 const UserPage = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<string | null>(null);
+  const {setCurrentPlay} = useCurrentPlay();
 
   // 로컬스토리지에서 user 가져오기
   useEffect(() => {
@@ -13,12 +15,12 @@ const UserPage = () => {
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     } else {
-      // navigate('/user/login'); // user가 없으면 로그인 페이지로 이동
+      navigate('/user/login'); // user가 없으면 로그인 페이지로 이동
     }
   }, [navigate]);
 
   if (!user) {
-    //return null; // user가 없으면 아무것도 렌더링하지 않음
+    return null; // user가 없으면 아무것도 렌더링하지 않음
   }
 
   const handleLogout = async () => {
@@ -29,6 +31,8 @@ const UserPage = () => {
         },
       });
       localStorage.removeItem('user');
+      localStorage.removeItem('currentPlay');
+
       navigate('/');
     } catch (error) {
       console.error('로그아웃 실패:', error);
@@ -38,7 +42,9 @@ const UserPage = () => {
   return (
     <div className="flex flex-col gap-6">
       <div className="w-full flex flex-col justify-center items-center bg-white h-[250px]">
-        <div className="w-25 h-25 bg-gray-100 rounded-full"></div>
+        <div className="w-25 h-25 bg-gray-100 rounded-full">
+          <img src ='/icon/profile.png' className='w-25 h-25'/>
+        </div>
         <h2 className="mt-5 flex text-title">
           {user ? user : '사용자 정보 없음'}
         </h2>
@@ -57,6 +63,12 @@ const UserPage = () => {
             onClick={() => navigate('/')}
           >
             홈으로
+          </button>
+           <button
+            className="w-full bg-blue-100 text-gray-800  font-semibold px-4 py-2 rounded-md  transition-colors duration-200"
+            onClick={() => navigate('/voice')}
+          >
+            음성 샘플 녹음하기
           </button>
         </div>
         <div className="w-full text-gray-800  font-semibold px-4 py-2 rounded-md  transition-colors duration-200"></div>

@@ -4,10 +4,12 @@ import { CurrentPlay } from '../type';
 interface CurrentPlayContextType {
   currentPlay: CurrentPlay | null;
   currentTime: number;
+  wavFile: any;
   currentPlayStoryId: number;
   setCurrentTime: (time: number) => void;
+  setWavFile: (wavFile: any)=>void;
   setCurrentPlayStoryId: (id: number) => void;
-  setCurrentPlay: (currentPlay: CurrentPlay) => void;
+  setCurrentPlay: (currentPlay: CurrentPlay | null) => void;
 }
 
 const CurrentPlayContext = createContext<CurrentPlayContextType | undefined>(
@@ -35,6 +37,10 @@ export const CurrentPlayProvider = ({
 
   const [currentTime, setCurrentTime] = useState(0);
   const [currentPlayStoryId, setCurrentPlayStoryId] = useState(0);
+  const [wavFile, setWavFile]= useState<any>();
+
+  const user = localStorage.getItem('user');
+  const parsedUser = user ? JSON.parse(user) : null;
 
   useEffect(() => {
     try {
@@ -42,13 +48,16 @@ export const CurrentPlayProvider = ({
     } catch (e) {
       console.error('Failed to save currentPlay to localStorage:', e);
     }
-  }, [currentPlay]);
+  }, [currentPlay, parsedUser]);
+
   return (
     <CurrentPlayContext.Provider
       value={{
         currentPlay,
         currentTime,
         currentPlayStoryId,
+        wavFile,
+        setWavFile,
         setCurrentTime,
         setCurrentPlayStoryId,
         setCurrentPlay,

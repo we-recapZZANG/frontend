@@ -10,7 +10,7 @@ const NavigationBar = () => {
     },
     {
       icon: '/icon/archive.svg',
-      active: 'icon/fill-heart.svg',
+      active: '/icon/fill-heart.svg',
       text: '아카이브',
       route: '/archive',
     },
@@ -31,11 +31,22 @@ const NavigationBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+const isActiveRoute = (currentPath: string, route: string) => {
+  if (route === '/') return currentPath === '/';
+  
+  // 아카이브 탭의 활성화 조건 추가
+  if (route === '/archive') {
+    return currentPath.startsWith('/archive') || currentPath.startsWith('/play');
+  }
+
+  return currentPath.startsWith(route);
+};
+
   return (
     <div className="fixed bottom-0 left-0 right-0 w-full bg-white border-none rounded-t-3xl z-50">
       <div className="max-w-[780px] w-full mx-auto h-20 flex justify-around items-center">
         {navItem.map((item) => {
-          const isActive = location.pathname === item.route;
+          const isActive = isActiveRoute(location.pathname, item.route);
 
           return (
             <button

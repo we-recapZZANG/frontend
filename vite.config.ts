@@ -19,16 +19,17 @@ export default ({ mode }: ConfigEnv) => {
       },
     },
     server: {
-      https: {
-        key: fs.readFileSync(path.resolve(__dirname, 'localhost+1-key.pem')),
-        cert: fs.readFileSync(path.resolve(__dirname, 'localhost+1.pem')),
-      },
+      // https: {
+      //   key: fs.readFileSync(path.resolve(__dirname, 'localhost+1-key.pem')),
+      //   cert: fs.readFileSync(path.resolve(__dirname, 'localhost+1.pem')),
+      // },
       host: true,
       port: 5173,
       allowedHosts: [
         '4e61-115-91-214-5.ngrok-free.app',
         '3248-115-91-214-5.ngrok-free.app',
         'b08d-115-91-214-5.ngrok-free.app',
+        '5e32-115-91-214-5.ngrok-free.app',
       ],
     },
   });

@@ -40,6 +40,7 @@ const CamPage = () => {
     top: 0,
     behavior: 'smooth', // 부드럽게 이동 (선택)
   });
+
   };
 
   const movingTime = timestamps?.length || 0;

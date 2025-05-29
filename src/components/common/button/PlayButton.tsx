@@ -25,6 +25,7 @@ const PlayButton = ({ storyId }: PlayButtonProps) => {
         setCurrentPlay(data);
       }
       navigate(`/play/${storyId}`)
+
     } else {
       console.error('Story data not found for the given storyId:', storyId);
     }

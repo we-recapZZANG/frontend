@@ -21,6 +21,7 @@ const PlayAudioBook = ({ playAudioBookData }: PlayAudioBookProps) => {
   const { currentTime, setCurrentTime, setCurrentPlay } = useCurrentPlay();
   const {wavFile} = useCurrentPlay();
 
+
   const formatTime = (time: number) => {
     const mins = Math.floor(time / 60).toString().padStart(2, '0');
     const secs = Math.floor(time % 60).toString().padStart(2, '0');
@@ -84,6 +85,7 @@ const PlayAudioBook = ({ playAudioBookData }: PlayAudioBookProps) => {
       audio.removeEventListener('loadedmetadata', updateTime);
       audio.removeEventListener('ended', () => setIsPlaying(false));
     };
+
   }, [ setCurrentTime, setCurrentPlay, playAudioBookData]);
 
   return (

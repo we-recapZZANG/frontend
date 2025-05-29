@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import Category from '../../components/main/Category';
 import { useEffect, useState } from 'react';
 import { authenticatedApi } from '../../api/base';
 import { useCurrentPlay } from '../../store/CurrentPlayContext';
@@ -65,6 +64,7 @@ const UserPage = () => {
             홈으로
           </button>
            <button
+
             className="w-full bg-blue-100 text-gray-800  font-semibold px-4 py-2 rounded-md  transition-colors duration-200"
             onClick={() => navigate('/voice')}
           >

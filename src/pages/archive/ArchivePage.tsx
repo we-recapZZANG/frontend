@@ -4,32 +4,12 @@ import { useArchive } from '../../store/ArchiveContext';
 import { useArchives } from '../../hooks/archive/useGetArchiveList';
 import { useEffect } from 'react';
 
-const ARCHIVE_LIST_DATA: {
-  storyId: number;
-  title: string;
-  category: 'FAIRY_TALE' | 'LETTER';
-  storyLength: string;
-  created_at: string;
-}[] = [
-  {
-    storyId: 1,
-    title: '성냥 팔이 소녀',
-    category: 'FAIRY_TALE',
-    storyLength: '00:00',
-    created_at: '5월 7일',
-  },
-  {
-    storyId: 2,
-    title: '테스트 제목',
-    category: 'LETTER',
-    storyLength: '00:00',
-    created_at: '5월 7일',
-  },
-];
 
 const ArchivePage = () => {
   const navigate = useNavigate();
   const { archives, loading, error, refetch } = useArchives();
+
+
   const { setArchiveList } = useArchive();
 
   useEffect(() => {

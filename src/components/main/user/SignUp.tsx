@@ -29,7 +29,7 @@ const SignUp = () => {
 
     if (isSuccess) {
       reset();
-      
+
     }
   };
 

@@ -12,14 +12,14 @@ const StoryContentPage = () => {
   const { setTrackList } = useTrack();
   const { setCurrentPlay, setCurrentPlayStoryId, setWavFile } = useCurrentPlay();
   const { archiveList } = useArchive();
-  const { requestAudioBook, loading: audioLoading } = useRequestAudioBook();
+  const { requestAudioBook } = useRequestAudioBook();
 
 
   const [isOpen, setIsOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
 
   const NumberStoryId = Number(storyId);
-  const { archive, loading, error } = useArchiveDetail(NumberStoryId);
+  const { archive } = useArchiveDetail(NumberStoryId);
 
   const currentStory = archiveList.find(
     (item) => item.storyId === NumberStoryId
@@ -86,6 +86,7 @@ const StoryContentPage = () => {
 
   return pages;
 }, [archive?.content]);
+
 
   const totalPages = contentPages.length;
 

@@ -7,10 +7,9 @@ import { useTrack } from '../../store/TrackContext';
 import AddTrackList from '../../components/track/modal/AddTrackModal';
 import { useCurrentPlay } from '../../store/CurrentPlayContext';
 import { useEffect } from 'react';
-import { useArchive } from '../../store/ArchiveContext';
 
 const PlayAudioBookPage = () => {
-  const { trackList, setTrackList } = useTrack();
+  const { trackList } = useTrack();
 
   const { currentPlay, setCurrentPlay } = useCurrentPlay();
 

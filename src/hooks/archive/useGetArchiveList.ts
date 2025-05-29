@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { authenticatedApi } from '../../api/base';
 import { Archive } from '../../type';
-import { useArchive } from '../../store/ArchiveContext';
 
 interface ArchivesResponse {
   archives: Archive[];

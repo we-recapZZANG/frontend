@@ -4,11 +4,9 @@ import { useArchive } from '../../store/ArchiveContext';
 import { useArchives } from '../../hooks/archive/useGetArchiveList';
 import { useEffect } from 'react';
 
-
 const ArchivePage = () => {
   const navigate = useNavigate();
-  const { archives, loading, error, refetch } = useArchives();
-
+  const { archives, loading, error } = useArchives();
 
   const { setArchiveList } = useArchive();
 

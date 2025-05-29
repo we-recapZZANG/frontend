@@ -10,7 +10,7 @@ interface PlayButtonProps {
 const PlayButton = ({ storyId }: PlayButtonProps) => {
   const { trackList } = useTrack();
   const { setCurrentPlay } = useCurrentPlay();
-  const { requestAudioBook, loading } = useRequestAudioBook();
+  const { requestAudioBook } = useRequestAudioBook();
   const navigate = useNavigate();
 
   const handleClickPlayButton = async () => {
@@ -24,8 +24,7 @@ const PlayButton = ({ storyId }: PlayButtonProps) => {
       if (data) {
         setCurrentPlay(data);
       }
-      navigate(`/play/${storyId}`)
-
+      navigate(`/play/${storyId}`);
     } else {
       console.error('Story data not found for the given storyId:', storyId);
     }

@@ -14,17 +14,17 @@ const TimeStampItem = ({ timestamp, handleSeek }: TimeStampItemProps) => {
 
         <div className="px-5">
           <button
-            className="text-xs text-gray-400 pt-1"
+            className="text-xs text-gray-400 pt-1 hover:text-pink-400"
             onClick={() => handleSeek(timestamp.timeStamp)}
           >
             {timestamp.timeStamp}
           </button>
 
           <p>{movingCategory}움직임 감지</p>
-          {movingCategory ? (
-            <span className="text-description">아기가 뒤집혔습니다.</span>
+          {movingCategory === '약한' ? (
+            <span className="text-description">아이가 움직였습니다.</span>
           ) : (
-            <></>
+            <span className="text-description">아기가 뒤집혔습니다!</span>
           )}
         </div>
       </div>

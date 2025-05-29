@@ -18,6 +18,7 @@ export interface CurrentPlay {
   category: 'FAIRY_TALE' | 'LETTER';
   userVoiceUrl: string;
   voiceFileLength: string;
+  storyId: number;
 }
 
 export interface Archive {

@@ -7,9 +7,11 @@ import { useTrack } from '../../store/TrackContext';
 import AddTrackList from '../../components/track/modal/AddTrackModal';
 import { useCurrentPlay } from '../../store/CurrentPlayContext';
 import { useEffect } from 'react';
+import { useArchive } from '../../store/ArchiveContext';
 
 const PlayAudioBookPage = () => {
-  const { trackList } = useTrack();
+  const { trackList, setTrackList } = useTrack();
+
   const { currentPlay, setCurrentPlay } = useCurrentPlay();
 
   useEffect(() => {
@@ -23,7 +25,7 @@ const PlayAudioBookPage = () => {
 
   return (
     <div className="w-full flex align-items justify-center">
-      <main className="relative w-full h-screen md:w-1/2 md:h-screen items-center  bg-yellow flex flex-col ">
+      <main className="relative w-full h-screen md:w-1/2 md:h-screen items-center bg-yellow flex flex-col">
         <Header />
         {!currentPlay && (
           <div className="flex items-center h-[35%] justify-center w-full p-5 text-stone-400">

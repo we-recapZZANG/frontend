@@ -12,7 +12,7 @@ const HomePage = () => {
   const [user, setUser] = useState<string>('');
 
   const cards: { id: number; icon: string; text: string; size: CardSize }[] = [
-    { id: 1, icon: './icon/mike.svg', text: '최근 녹음', size: 'medium' },
+    { id: 1, icon: './icon/mike.svg', text: '최근 재생', size: 'medium' },
     { id: 2, icon: './icon/moon.svg', text: '수면 분석', size: 'medium' },
   ];
 
@@ -25,9 +25,9 @@ const HomePage = () => {
     if (parsedUser) {
       setUser(parsedUser);
     }
-    // } else {
-    //   navigate('/user/login');
-    // }
+    else {
+      navigate('/user/login');
+    }
   }, [navigate]);
 
   const sleepingTime = 0;
@@ -41,7 +41,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="px-6 py-10">
+    <div className="px-6 py-10 h-screen pb-10">
       <h2 className="flex text-title">안녕하세요, {user}님!</h2>
       <p className="text-description my-2">오늘도 편안한 하루 되세요🤍</p>
       <div className="flex flex-col gap-10">
@@ -54,7 +54,7 @@ const HomePage = () => {
               >
                 <img src={card.icon} width={25} height={25} alt={card.text} />
                 <p className="text-sm">{card.text}</p>
-                {card.text === '최근 녹음' ? (
+                {card.text === '최근 재생' ? (
                   <span className="text-xs text-gray-400">
                     최근 재생 보러 가기
                   </span>

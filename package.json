@@ -4,11 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --https --host 172.16.28.151",
+    "dev": "vite",
+    "dev:https": "vite —https —host 172.16.28.151 —port 5173",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "start": "HOST=0.0.0.0 react-scripts start"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.2.3",
@@ -33,6 +32,7 @@
     "@types/node": "^22.14.1",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-basic-ssl": "^2.0.0",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",

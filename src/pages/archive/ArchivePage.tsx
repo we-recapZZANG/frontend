@@ -2,19 +2,16 @@ import { useNavigate } from 'react-router-dom';
 import ArchiveCard from '../../components/archive/ArchiveCard';
 import { useArchive } from '../../store/ArchiveContext';
 import { useArchives } from '../../hooks/archive/useGetArchiveList';
+import { useEffect } from 'react';
 
 const ArchivePage = () => {
   const navigate = useNavigate();
-<<<<<<< Updated upstream
-  const { archives, loading, error, refetch } = useArchives();
-=======
   const { archives, loading, error } = useArchives();
   const { setArchiveList } = useArchive();
 
   useEffect(() => {
     setArchiveList(archives);
   }, [archives]);
->>>>>>> Stashed changes
 
   return (
     <div className="px-6 py-10">

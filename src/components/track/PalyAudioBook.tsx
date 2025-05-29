@@ -18,10 +18,7 @@ const PlayAudioBook = ({ playAudioBookData }: PlayAudioBookProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const { currentTime, setCurrentTime, setCurrentPlay } = useCurrentPlay();
-<<<<<<< Updated upstream
-=======
-  const { wavFile } = useCurrentPlay();
->>>>>>> Stashed changes
+  // const { wavFile } = useCurrentPlay();
 
   const formatTime = (time: number) => {
     const mins = Math.floor(time / 60)
@@ -77,11 +74,7 @@ const PlayAudioBook = ({ playAudioBookData }: PlayAudioBookProps) => {
       audio.removeEventListener('loadedmetadata', updateTime);
       audio.removeEventListener('ended', () => setIsPlaying(false));
     };
-<<<<<<< Updated upstream
-  }, [setCurrentTime]);
-=======
   }, [setCurrentTime, setCurrentPlay, playAudioBookData]);
->>>>>>> Stashed changes
 
   return (
     <div

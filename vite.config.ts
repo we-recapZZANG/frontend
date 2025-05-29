@@ -1,19 +1,8 @@
-import { defineConfig } from 'vite';
+import { ConfigEnv, defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import tailwindcss from '@tailwindcss/vite';
 
-<<<<<<< Updated upstream
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [react(), tailwindcss()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
-    },
-  },
-});
-=======
 export default ({ mode }: ConfigEnv) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
@@ -44,4 +33,3 @@ export default ({ mode }: ConfigEnv) => {
     //   : undefined,
   });
 };
->>>>>>> Stashed changes

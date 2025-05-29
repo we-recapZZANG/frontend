@@ -25,14 +25,10 @@ const SignUp = () => {
 
   const handleRegister = async (data: FormValues) => {
     const isSuccess = await onSubmitForm(data);
-<<<<<<< Updated upstream
-    if (isSuccess) reset();
-=======
 
     if (isSuccess) {
       reset();
     }
->>>>>>> Stashed changes
   };
 
   return (

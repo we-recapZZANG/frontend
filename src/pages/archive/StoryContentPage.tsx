@@ -12,11 +12,7 @@ const StoryContentPage = () => {
   const { setTrackList } = useTrack();
   const { setCurrentPlay, setCurrentPlayStoryId } = useCurrentPlay();
   const { archiveList } = useArchive();
-<<<<<<< Updated upstream
-  const { requestAudioBook, loading: audioLoading } = useRequestAudioBook();
-=======
   const { requestAudioBook } = useRequestAudioBook();
->>>>>>> Stashed changes
 
   const [isOpen, setIsOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
@@ -51,12 +47,6 @@ const StoryContentPage = () => {
 
   const contentPages = useMemo(() => {
     if (!archive?.content) return [];
-<<<<<<< Updated upstream
-    const pages = [];
-    for (let i = 0; i < archive.content.length; i += 100) {
-      pages.push(archive.content.slice(i, i + 100));
-    }
-=======
 
     const pages = [];
     let i = 0;
@@ -91,7 +81,6 @@ const StoryContentPage = () => {
       i = end;
     }
 
->>>>>>> Stashed changes
     return pages;
   }, [archive?.content]);
 

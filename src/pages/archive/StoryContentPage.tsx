@@ -12,13 +12,17 @@ const StoryContentPage = () => {
   const { setTrackList } = useTrack();
   const { setCurrentPlay, setCurrentPlayStoryId } = useCurrentPlay();
   const { archiveList } = useArchive();
+<<<<<<< Updated upstream
   const { requestAudioBook, loading: audioLoading } = useRequestAudioBook();
+=======
+  const { requestAudioBook } = useRequestAudioBook();
+>>>>>>> Stashed changes
 
   const [isOpen, setIsOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
 
   const NumberStoryId = Number(storyId);
-  const { archive, loading, error } = useArchiveDetail(NumberStoryId);
+  const { archive } = useArchiveDetail(NumberStoryId);
 
   const currentStory = archiveList.find(
     (item) => item.storyId === NumberStoryId
@@ -47,10 +51,47 @@ const StoryContentPage = () => {
 
   const contentPages = useMemo(() => {
     if (!archive?.content) return [];
+<<<<<<< Updated upstream
     const pages = [];
     for (let i = 0; i < archive.content.length; i += 100) {
       pages.push(archive.content.slice(i, i + 100));
     }
+=======
+
+    const pages = [];
+    let i = 0;
+    const content = archive.content;
+
+    while (i < content.length) {
+      let end = i + 150;
+      if (end >= content.length) {
+        pages.push(content.slice(i)); // 남은 전부 push
+        break;
+      }
+
+      let slice = content.slice(i, end);
+      let dotIndex = slice.lastIndexOf('.');
+
+      if (dotIndex === -1) {
+        // 100자 안에 마침표 없으면, 이후에서 마침표 찾기
+        let nextDot = content.indexOf('.', end);
+        if (nextDot === -1) {
+          // 더 이상 마침표 없으면 남은 전체 push
+          pages.push(content.slice(i));
+          break;
+        } else {
+          end = nextDot + 1; // 마침표 포함해서 자름
+        }
+      } else {
+        // 마침표가 있는 위치까지만 자름
+        end = i + dotIndex + 1;
+      }
+
+      pages.push(content.slice(i, end));
+      i = end;
+    }
+
+>>>>>>> Stashed changes
     return pages;
   }, [archive?.content]);
 

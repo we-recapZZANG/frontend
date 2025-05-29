@@ -6,10 +6,27 @@ import PlayAudioBook from '../../components/track/PalyAudioBook';
 import { useTrack } from '../../store/TrackContext';
 import AddTrackList from '../../components/track/modal/AddTrackModal';
 import { useCurrentPlay } from '../../store/CurrentPlayContext';
+<<<<<<< Updated upstream
 
 const PlayAudioBookPage = () => {
   const { trackList } = useTrack();
   const { currentPlay } = useCurrentPlay();
+=======
+import { useEffect } from 'react';
+
+const PlayAudioBookPage = () => {
+  const { trackList } = useTrack();
+  const { currentPlay, setCurrentPlay } = useCurrentPlay();
+
+  useEffect(() => {
+    const stored = localStorage.getItem('currentPlay');
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      setCurrentPlay(parsed);
+    }
+    // setTrackList(archiveList);
+  }, []);
+>>>>>>> Stashed changes
 
   return (
     <div className="w-full flex align-items justify-center">

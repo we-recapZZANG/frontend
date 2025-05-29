@@ -2,7 +2,11 @@ import { useNavigate } from 'react-router-dom';
 import CardWrapper from '../../common/card/Card';
 import { useForm } from 'react-hook-form';
 import TextField from '../../common/textField/TextField';
+<<<<<<< Updated upstream
 import { publicApi } from '../../../api/base';
+=======
+import { authenticatedApi } from '../../../api/base';
+>>>>>>> Stashed changes
 
 interface LoginForm {
   email: string;

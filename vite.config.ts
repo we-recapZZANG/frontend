@@ -8,7 +8,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default ({ mode }: ConfigEnv) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
-  const isDevelop: boolean = process.env.VITE_DEVELOP === 'true'; // 환경변수를 Boolean으로 변환
+  const isDevelop: boolean = process.env.VITE_DEVELOP === 'true';
 
   return defineConfig({
     plugins: [react(), tailwindcss()],
@@ -18,19 +18,20 @@ export default ({ mode }: ConfigEnv) => {
         '@': path.resolve(__dirname, './src'),
       },
     },
-    server: {
-      // https: {
-      //   key: fs.readFileSync(path.resolve(__dirname, 'localhost+1-key.pem')),
-      //   cert: fs.readFileSync(path.resolve(__dirname, 'localhost+1.pem')),
-      // },
-      host: true,
-      port: 5173,
-      allowedHosts: [
-        '4e61-115-91-214-5.ngrok-free.app',
-        '3248-115-91-214-5.ngrok-free.app',
-        'b08d-115-91-214-5.ngrok-free.app',
-        '5e32-115-91-214-5.ngrok-free.app',
-      ],
-    },
+    server: isDevelop
+      ? {
+          https: {
+            key: fs.readFileSync(
+              path.resolve(__dirname, 'localhost+2-key.pem')
+            ),
+            cert: fs.readFileSync(path.resolve(__dirname, 'localhost+2.pem')),
+          },
+          port: 5173,
+          host: '0.0.0.0',
+          allowedHosts: [
+            /* ... */
+          ],
+        }
+      : undefined,
   });
 };

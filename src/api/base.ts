@@ -2,11 +2,11 @@
 import axios from 'axios';
 
 export const authenticatedApi = axios.create({
-  baseURL: 'https://006e-2001-e60-927c-6055-6dc5-1386-89c5-14c9.ngrok-free.app',
+  baseURL: 'https://fb3f-2001-e60-9279-5aa0-640a-5678-b7ec-7151.ngrok-free.app',
   withCredentials: true,
 });
 
 export const publicApi = axios.create({
-  baseURL: 'https://006e-2001-e60-927c-6055-6dc5-1386-89c5-14c9.ngrok-free.app',
+  baseURL: 'https://fb3f-2001-e60-9279-5aa0-640a-5678-b7ec-7151.ngrok-free.app',
   withCredentials: true,
 });

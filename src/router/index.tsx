@@ -66,6 +66,17 @@ export const router = createBrowserRouter([
   },
 
   {
+    path: 'consent/:storyId',
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <StoryContentPage />,
+      },
+    ],
+  },
+
+  {
     path: '/archive/edit/:storyId',
     element: <EditStoryPage />,
   },

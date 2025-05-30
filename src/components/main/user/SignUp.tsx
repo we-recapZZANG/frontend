@@ -3,6 +3,7 @@ import CardWrapper from '../../common/card/Card';
 import { Checkbox } from '../../components/ui/checkbox';
 import TextField from '../../common/textField/TextField';
 import { useRegisterForm } from '../../../hooks/user/useRegisterForm';
+import { useNavigate } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
 
 type FormValues = {
@@ -22,6 +23,8 @@ const SignUp = () => {
     defaultValues: { email: '', password: '', name: '' },
   });
 
+  const navigate = useNavigate();
+
   const { onSubmitForm, serverError, successMessage } = useRegisterForm();
 
   const handleRegister = async (data: FormValues) => {
@@ -30,6 +33,9 @@ const SignUp = () => {
     if (isSuccess) {
       reset();
     }
+  };
+  const handleClickConsent = () => {
+    navigate('/consent');
   };
 
   return (
@@ -114,7 +120,10 @@ const SignUp = () => {
               </label>
             </div>
             <div>
-              <button className="text-xs  text-stone-500 font-bold">
+              <button
+                className="text-xs  text-stone-500 font-bold"
+                onClick={handleClickConsent}
+              >
                 전문보기
               </button>
             </div>

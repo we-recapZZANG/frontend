@@ -24,9 +24,8 @@ const HomePage = () => {
     console.log(parsedUser);
     if (parsedUser) {
       setUser(parsedUser);
-    }
-    else {
-      navigate('/user/login');
+    } else {
+      navigate('/onboarding');
     }
   }, [navigate]);
 
@@ -41,7 +40,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="px-6 py-10 h-screen pb-10">
+    <div className="px-3 h-screen pt-10 pb-10">
       <h2 className="flex text-title">안녕하세요, {user}님!</h2>
       <p className="text-description my-2">오늘도 편안한 하루 되세요🤍</p>
       <div className="flex flex-col gap-10">

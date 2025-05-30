@@ -21,15 +21,16 @@ const parseTimeStringToSeconds = (timeString: string): number => {
 };
 
 const CurrentAudio = () => {
-  const { currentPlay, currentTime,currentPlayStoryId, setCurrentPlay } = useCurrentPlay();
+  const { currentPlay, currentTime, currentPlayStoryId, setCurrentPlay } =
+    useCurrentPlay();
   const navigate = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
     const localCurrentPlay = localStorage.getItem('currentPlay');
-    if(!localCurrentPlay){
-      setCurrentPlay(null)
+    if (!localCurrentPlay) {
+      setCurrentPlay(null);
     }
-  },[])
+  }, []);
 
   if (!currentPlay)
     return (
@@ -56,7 +57,7 @@ const CurrentAudio = () => {
   const progress = totalSeconds > 0 ? (currentTime / totalSeconds) * 100 : 0;
 
   const handleClickCard = () => {
-   navigate(`play/${currentPlayStoryId}`)
+    navigate(`play/${currentPlayStoryId}`);
   };
 
   return (
@@ -68,25 +69,35 @@ const CurrentAudio = () => {
         >
           <h2>최근 재생</h2>
           <span className="text-xs text-gray-400">
-          {formatTime(totalSeconds) === '00:00' ? '' : formatTime(totalSeconds)}
+            {formatTime(totalSeconds) === '00:00'
+              ? ''
+              : formatTime(totalSeconds)}
           </span>
         </div>
 
         <div className="w-full h-[100px] p-5 bg-pink border-none rounded-2xl">
           <div className="w-full h-[50px] flex justify-between items-center">
             <h2 className="font-bold text-gray-600 text-sm">{textTitle}</h2>
-            <div className='flex items-center justify-center bg-pink-400 rounded-full w-10 h-10' onClick = {()=> navigate(`play/${currentPlayStoryId}`)}>
-            <img src="/icon/play.svg" width={15} height={15} alt="audio-play" />
+            <div
+              className="flex items-center justify-center bg-pink-400 rounded-full w-10 h-10"
+              onClick={() => navigate(`play/${currentPlayStoryId}`)}
+            >
+              <img
+                src="/icon/play.svg"
+                width={15}
+                height={15}
+                alt="audio-play"
+              />
             </div>
           </div>
         </div>
 
         <ProgressBar progress={progress} />
 
-        <div className="pl-3 pr-3 pt-2 flex justify-between text-stone-400 text-xs">
+        {/* <div className="pl-3 pr-3 pt-2 flex justify-between text-stone-400 text-xs">
            <p>{formatTime(currentTime)}</p>
            <p>{formatTime(totalSeconds) === '00:00' ? '' : formatTime(totalSeconds)}</p>
-        </div>
+        </div> */}
       </CardWrapper>
     </div>
   );

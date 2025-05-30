@@ -5,7 +5,6 @@ import { useArchiveDetail } from '../../hooks/archive/useGetArchive';
 import { useArchive } from '../../store/ArchiveContext';
 import { useRequestAudioBook } from '../../hooks/audioBook/useRequestAudioBook';
 import { useState, useMemo } from 'react';
-import Loading from '../../components/loading/Loading';
 
 const StoryContentPage = () => {
   const navigate = useNavigate();
@@ -13,7 +12,7 @@ const StoryContentPage = () => {
   const { setTrackList } = useTrack();
   const { setCurrentPlay, setCurrentPlayStoryId } = useCurrentPlay();
   const { archiveList } = useArchive();
-  const { requestAudioBook, loading } = useRequestAudioBook();
+  const { requestAudioBook } = useRequestAudioBook();
 
   const [isOpen, setIsOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
@@ -90,7 +89,6 @@ const StoryContentPage = () => {
   return (
     <div className="w-full h-screen flex flex-col items-center">
       <div className="relative w-80 h-[480px] flex justify-center items-center">
-        <Loading loading={loading} />
         {isOpen ? (
           <>
             {/* 속지 이미지 */}
@@ -179,7 +177,7 @@ const StoryContentPage = () => {
         )}
       </div>
 
-      <div className="mt-4 flex flex-col items-center space-y-2 w-full">
+      <div className="mt-2 flex flex-col items-center space-y-2 w-full">
         <button
           className="w-[95%] bg-pink-300 text-sm m-4 p-4 rounded-xl"
           onClick={handleClickPlayButton}

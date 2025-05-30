@@ -89,7 +89,7 @@ const PlayAudioBook = ({ playAudioBookData }: PlayAudioBookProps) => {
 
   return (
     <div
-      className="w-full flex justify-center flex-col h-[35%] px-10 bg-white border border-gray-100 rounded-b-2xl"
+      className="w-full flex justify-center flex-col h-[38%] px-10 bg-white border border-gray-100 rounded-b-2xl"
       style={{
         boxShadow: '2px 3px 5px rgba(0, 0, 0, 0.05)',
         background: '#FFFFFF',

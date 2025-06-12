@@ -31,6 +31,7 @@ const UserPage = () => {
       });
       localStorage.removeItem('user');
       localStorage.removeItem('currentPlay');
+      localStorage.removeItem('camUrl');
 
       navigate('/');
     } catch (error) {

@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 export const publicApi = axios.create({
-  baseURL: 'https://2c09-2001-e60-9230-ae69-ecff-f478-ed15-a198.ngrok-free.app',
+  baseURL: 'https://7fbb-2001-e60-8e61-401d-944b-88b4-34e0-befb.ngrok-free.app',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -11,7 +11,7 @@ export const publicApi = axios.create({
 });
 
 export const authenticatedApi = axios.create({
-  baseURL: 'https://2c09-2001-e60-9230-ae69-ecff-f478-ed15-a198.ngrok-free.app',
+  baseURL: 'https://7fbb-2001-e60-8e61-401d-944b-88b4-34e0-befb.ngrok-free.app',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',

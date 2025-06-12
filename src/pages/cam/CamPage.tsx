@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import Cam from '../../components/cam/Cam';
 import Motion from '../../components/cam/Motion';
 import TimeStamp from '../../components/cam/TimeStamp';
+import RealTimeAnalysisModal from '../../components/cam/WarningModal';
+import { authenticatedApi } from '../../api/base';
 
 type TimeStampEntry = { category: string; timeStamp: string };
 type TimstampDataType = {
@@ -61,11 +63,14 @@ const CamPage = () => {
   const [videoUrl, setVideoUrl] = useState<string>('');
   const [timestamps, setTimestamps] = useState<TimeStampEntry[]>([]);
   const { camTitle } = useParams<{ camTitle: string }>();
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
-    if (camTitle && TimstampData[camTitle]) {
+    if (camTitle === 'default') {
+      fetchVideoUrl();
+      fetchTimestamps();
+    } else if (camTitle && TimstampData[camTitle]) {
       // move와 PoseDown 모두 합쳐서 timestamps로 설정
-
       setTimestamps(TimstampData[camTitle].timeStamps);
       setVideoUrl(TimstampData[camTitle].videoUrl);
     } else {
@@ -90,9 +95,51 @@ const CamPage = () => {
   const movingTime = timestamps.length;
   const sleepQuality = Math.max(0, Math.min(100, (1 - movingTime / 10) * 100));
 
+  const fetchVideoUrl = async () => {
+    try {
+      const response = await authenticatedApi.get('/api/videos/location', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      setVideoUrl(response.data.videoLocation);
+    } catch (error) {
+      console.error('영상 정보를 불러오는 데 실패했습니다.', error);
+    }
+  };
+
+  const fetchTimestamps = async () => {
+    try {
+      const res = await authenticatedApi.get('api/videos', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      setTimestamps(res.data.timeStamps);
+    } catch (error) {
+      console.error('타임스탬프 불러오기 실패', error);
+    }
+  };
+
+  const onConfirm = () => {
+    setIsOpen(false);
+    fetchVideoUrl();
+    fetchTimestamps();
+  };
+
+  const onCancel = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div>
-      {/* <RealTimeAnalysisModal isOpen={isOpen} onCancel={onCancel} onConfirm={onConfirm} /> */}
+      {camTitle === 'default' && (
+        <RealTimeAnalysisModal
+          isOpen={isOpen}
+          onCancel={onCancel}
+          onConfirm={onConfirm}
+        />
+      )}
       <Cam timestamps={timestamps} videoRef={videoRef} videoUrl={videoUrl} />
       <div className="flex flex-col p-4">
         <Motion movingTime={movingTime} quality={sleepQuality} />

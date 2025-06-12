@@ -8,7 +8,7 @@ const CamUploadPage = () => {
     name: string;
     type: string;
   } | null>(null);
-
+  const [customName, setCustomName] = useState('');
   const navigate = useNavigate();
 
   const handleUploadClick = () => {
@@ -18,22 +18,21 @@ const CamUploadPage = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      console.log('선택한 파일:', file);
       setFileInfo({ name: file.name, type: file.type });
+      setCustomName('');
     }
   };
 
   const handleSubmitFile = () => {
     if (!fileInfo) return;
 
-    const fileName = fileInfo.name;
+    const fileName = customName.trim() || fileInfo.name;
 
     const camUrls = localStorage.getItem('camUrl');
     const camUrlList: string[] = camUrls ? JSON.parse(camUrls) : [];
 
     if (!camUrlList.includes(fileName)) {
       camUrlList.push(fileName);
-
       localStorage.setItem('camUrl', JSON.stringify(camUrlList));
 
       toast.success('영상 파일 저장에 성공하였습니다', {
@@ -46,9 +45,6 @@ const CamUploadPage = () => {
 
       navigate('/camlist');
     } else {
-      console.log('이미 존재하는 파일입니다.');
-      navigate('/camlist');
-
       toast.error('이미 존재하는 영상 파일입니다', {
         position: 'top-right',
         autoClose: 2000,
@@ -56,6 +52,7 @@ const CamUploadPage = () => {
         closeOnClick: true,
         theme: 'light',
       });
+      navigate('/camlist');
     }
   };
 
@@ -78,8 +75,15 @@ const CamUploadPage = () => {
             ) : (
               <div className="text-sm text-gray-700 text-center">
                 <p className="font-medium mb-1">
-                  📁 {fileInfo.name} {fileInfo.type}
+                  📁 {fileInfo.name} ({fileInfo.type})
                 </p>
+                <input
+                  type="text"
+                  value={customName}
+                  onChange={(e) => setCustomName(e.target.value)}
+                  placeholder="파일 이름을 입력해주세요 (예: baby1.mp4)"
+                  className="mt-3 w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                />
               </div>
             )}
           </div>
@@ -94,7 +98,8 @@ const CamUploadPage = () => {
 
           <button
             onClick={handleSubmitFile}
-            className="bg-[#ffe4e1] px-6 py-3 w-full rounded-xl font-bold text-gray-600 hover:bg-[#ffd4d4] transition-colors"
+            disabled={!fileInfo}
+            className="bg-[#ffe4e1] px-6 py-3 w-full rounded-xl font-bold text-gray-600 hover:bg-[#ffd4d4] transition-colors disabled:opacity-50"
           >
             파일 올리기
           </button>

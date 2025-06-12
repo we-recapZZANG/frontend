@@ -14,16 +14,15 @@ const CamPreview = ({ camUrl }: CamPreviewProps) => {
 
   return (
     <CardWrapper onClick={handleClick} size="large">
-      <video
-        src={`/cam/${camUrl}`}
-        muted
-        preload="metadata"
-        className="w-full object-cover rounded-lg"
-        onLoadedMetadata={(e) => {
-          const video = e.currentTarget;
-          video.currentTime = 1;
-        }}
-      />
+      <div className="flex items-center justify-center">
+        <img
+          src="/icon/rabbit.png"
+          alt="storybook-archive"
+          width={80}
+          height={80}
+        />
+      </div>
+
       <div className="p-4">
         <h3 className="text-lg font-semibold">{camUrl}</h3>
       </div>

@@ -5,6 +5,8 @@ import { useArchiveDetail } from '../../hooks/archive/useGetArchive';
 import { useArchive } from '../../store/ArchiveContext';
 import { useRequestAudioBook } from '../../hooks/audioBook/useRequestAudioBook';
 import { useState, useMemo } from 'react';
+// import Loading from '../../components/loading/Loading';
+import ProgressBarWithRandom from '../../components/common/progressBar/ProgressBarWithTimer';
 
 const StoryContentPage = () => {
   const navigate = useNavigate();
@@ -13,6 +15,7 @@ const StoryContentPage = () => {
   const { setCurrentPlay, setCurrentPlayStoryId } = useCurrentPlay();
   const { archiveList } = useArchive();
   const { requestAudioBook } = useRequestAudioBook();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
@@ -31,17 +34,24 @@ const StoryContentPage = () => {
 
   const handleClickPlayButton = async () => {
     if (NumberStoryId) {
-      const data = await requestAudioBook(NumberStoryId);
-      if (data) {
-        setCurrentPlay(data);
-        setCurrentPlayStoryId(NumberStoryId);
-        navigate(`/play/${NumberStoryId}`);
+      setIsLoading(true);
+
+      try {
+        const data = await requestAudioBook(NumberStoryId);
+
+        if (data) {
+          setCurrentPlay(data);
+          setCurrentPlayStoryId(NumberStoryId);
+          navigate(`/play/${NumberStoryId}`);
+          if (currentStory) {
+            setTrackList([currentStory]);
+          }
+        }
+      } catch (error) {
+        console.error('오디오북 요청 중 오류:', error);
+      } finally {
+        setIsLoading(false);
       }
-      if (currentStory) {
-        setTrackList([currentStory]);
-      }
-    } else {
-      console.error('Story data not found for the given storyId:', storyId);
     }
   };
 
@@ -85,6 +95,14 @@ const StoryContentPage = () => {
   }, [archive?.content]);
 
   const totalPages = contentPages.length;
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen flex flex-col items-center">
+        <ProgressBarWithRandom />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-screen flex flex-col items-center">

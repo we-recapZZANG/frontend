@@ -24,23 +24,25 @@ const NavigationBar = () => {
       icon: '/icon/cam.svg',
       active: '/icon/fill-cam.svg',
       text: '수면 영상',
-      route: '/sleep',
+      route: '/camlist',
     },
   ];
 
   const navigate = useNavigate();
   const location = useLocation();
 
-const isActiveRoute = (currentPath: string, route: string) => {
-  if (route === '/') return currentPath === '/';
-  
-  // 아카이브 탭의 활성화 조건 추가
-  if (route === '/archive') {
-    return currentPath.startsWith('/archive') || currentPath.startsWith('/play');
-  }
+  const isActiveRoute = (currentPath: string, route: string) => {
+    if (route === '/') return currentPath === '/';
 
-  return currentPath.startsWith(route);
-};
+    // 아카이브 탭의 활성화 조건 추가
+    if (route === '/archive') {
+      return (
+        currentPath.startsWith('/archive') || currentPath.startsWith('/play')
+      );
+    }
+
+    return currentPath.startsWith(route);
+  };
 
   return (
     <div className="fixed bottom-0 left-0 right-0 w-full bg-white border-none rounded-t-3xl z-50">

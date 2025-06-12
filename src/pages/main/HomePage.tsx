@@ -21,11 +21,10 @@ const HomePage = () => {
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     const parsedUser = storedUser ? JSON.parse(storedUser) : null;
-    console.log(parsedUser);
     if (parsedUser) {
       setUser(parsedUser);
     } else {
-      navigate('/onboarding');
+      // navigate('/onboarding');
     }
   }, [navigate]);
 

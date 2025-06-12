@@ -14,7 +14,7 @@ const UserPage = () => {
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     } else {
-      // navigate('/user/login'); // user가 없으면 로그인 페이지로 이동
+      navigate('/user/login'); // user가 없으면 로그인 페이지로 이동
     }
   }, [navigate]);
 

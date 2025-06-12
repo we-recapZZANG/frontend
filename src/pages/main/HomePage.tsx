@@ -24,7 +24,7 @@ const HomePage = () => {
     if (parsedUser) {
       setUser(parsedUser);
     } else {
-      // navigate('/onboarding');
+      navigate('/onboarding');
     }
   }, [navigate]);
 

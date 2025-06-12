@@ -9,10 +9,6 @@ interface CamProps {
 }
 
 const Cam = ({ videoRef, videoUrl, timestamps }: CamProps) => {
-  if (!videoUrl) {
-    return <div className="w-full h-[300px] bg-black" />;
-  }
-
   useEffect(() => {
     const interval = setInterval(() => {
       const currentTime = videoRef?.current?.currentTime;
@@ -48,36 +44,37 @@ const Cam = ({ videoRef, videoUrl, timestamps }: CamProps) => {
       return `${min}:${sec}`;
     };
 
-  const playAlarm = () => {
-  const audio = new Audio('/alarm.mp3');
-  audio.playbackRate = 1.75; 
+    const playAlarm = () => {
+      const audio = new Audio('/alarm.mp3');
+      audio.playbackRate = 1.75;
 
-  audio.play()
-    .then(() => {
-      setTimeout(() => {
-        audio.pause();
-        audio.currentTime = 0;
-      }, 2900);
-    })
-    .catch((err) => {
-      console.error('알람 재생 실패', err);
-    });
-  };
+      audio
+        .play()
+        .then(() => {
+          setTimeout(() => {
+            audio.pause();
+            audio.currentTime = 0;
+          }, 2900);
+        })
+        .catch((err) => {
+          console.error('알람 재생 실패', err);
+        });
+    };
     return () => clearInterval(interval);
   }, [timestamps, videoRef]);
 
   return (
     <div className="flex justify-center">
-   <video
-  ref={videoRef}
-  className="w-full max-w-3xl"
-  controls
-  autoPlay
-  muted
-  src={videoUrl}
->
-  브라우저가 video 태그를 지원하지 않습니다.
-</video>
+      <video
+        ref={videoRef}
+        className="w-full max-w-3xl"
+        controls
+        autoPlay
+        muted
+        src={videoUrl}
+      >
+        브라우저가 video 태그를 지원하지 않습니다.
+      </video>
     </div>
   );
 };

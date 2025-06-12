@@ -3,6 +3,7 @@ import DetailLayout from '../../components/layout/DetailLayout';
 import { toast } from 'react-toastify';
 import { authenticatedApi } from '../../api/base';
 import { useNavigate } from 'react-router-dom';
+import ProgressBarWithRandom from '../../components/common/progressBar/ProgressBarWithTimer';
 
 const categories = ['동화책', '편지'];
 
@@ -10,6 +11,7 @@ const EditStoryPage = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('동화책');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
 
@@ -20,6 +22,8 @@ const EditStoryPage = () => {
       동화책: 'FAIRY_TALE',
       편지: 'LETTER',
     };
+
+    setIsSubmitting(true); // 프로그레스 바 시작
 
     try {
       await authenticatedApi.post('/api/archive', {
@@ -50,6 +54,8 @@ const EditStoryPage = () => {
         theme: 'light',
       });
       console.error(error?.response?.data || error.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -105,6 +111,7 @@ const EditStoryPage = () => {
           저장하기
         </button>
       </form>
+      {isSubmitting && <ProgressBarWithRandom />}
     </DetailLayout>
   );
 };

@@ -12,6 +12,8 @@ import CamPage from '../pages/cam/CamPage';
 import UserPage from '../pages/main/UserPage';
 import StoryContentPage from '../pages/archive/StoryContentPage';
 import VoiceRecorder from '../pages/voice/VoicePage';
+import CamUploadPage from '../pages/cam/CamUploadPage';
+import CamListPage from '../pages/cam/CamListPage';
 
 export const router = createBrowserRouter([
   {
@@ -35,7 +37,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: '/sleep',
+    path: '/sleep/:camTitle',
     element: <Layout />,
     children: [
       {
@@ -64,7 +66,6 @@ export const router = createBrowserRouter([
       },
     ],
   },
-
   {
     path: 'consent/:storyId',
     element: <Layout />,
@@ -75,11 +76,31 @@ export const router = createBrowserRouter([
       },
     ],
   },
-
+  {
+    path: 'camlist',
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <CamListPage />,
+      },
+    ],
+  },
+  {
+    path: 'cam/upload',
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <CamUploadPage />,
+      },
+    ],
+  },
   {
     path: '/archive/edit/:storyId',
     element: <EditStoryPage />,
   },
+
   {
     path: 'onboarding',
     element: <OnboardingPage />,

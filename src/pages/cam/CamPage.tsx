@@ -5,6 +5,7 @@ import TimeStamp from '../../components/cam/TimeStamp';
 import { TimeStampEntry } from '../../type';
 import { authenticatedApi } from '../../api/base';
 import RealTimeAnalysisModal from '../../components/cam/WarningModal';
+import ProgressBarWithRandom from '../../components/common/progressBar/ProgressBarWithTimer';
 
 // const timeStams = [
 //   {
@@ -71,23 +72,23 @@ const CamPage = () => {
     }
   };
 
-  const onConfirm = () => {
-    setIsOpen(false);
-    fetchVideoUrl();
-    fetchTimestamps();
-  };
+  // const onConfirm = () => {
+  //   setIsOpen(false);
+  //   // fetchVideoUrl();
+  //   // fetchTimestamps();
+  // };
 
-  const onCancel = () => {
-    setIsOpen(false);
-  };
+  // const onCancel = () => {
+  //   setIsOpen(false);
+  // };
 
   return (
     <div>
-      <RealTimeAnalysisModal
+      {/* <RealTimeAnalysisModal
         isOpen={isOpen}
         onCancel={onCancel}
         onConfirm={onConfirm}
-      />
+      /> */}
       <Cam timestamps={timestamps} videoRef={videoRef} videoUrl={videoUrl} />
       <div className="flex flex-col p-4">
         <Motion movingTime={movingTime} quality={sleepQuality} />

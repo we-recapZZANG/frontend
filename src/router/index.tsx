@@ -66,7 +66,6 @@ export const router = createBrowserRouter([
       },
     ],
   },
-
   {
     path: 'consent/:storyId',
     element: <Layout />,
@@ -77,7 +76,6 @@ export const router = createBrowserRouter([
       },
     ],
   },
-
   {
     path: 'camlist',
     element: <Layout />,
@@ -88,7 +86,6 @@ export const router = createBrowserRouter([
       },
     ],
   },
-
   {
     path: 'cam/upload',
     element: <Layout />,

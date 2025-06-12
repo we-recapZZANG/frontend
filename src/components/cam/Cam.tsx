@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { TimeStampEntry } from '../../type';
 import { toast } from 'react-toastify';
 
@@ -9,20 +9,6 @@ interface CamProps {
 }
 
 const Cam = ({ videoRef, videoUrl, timestamps }: CamProps) => {
-  const [videoOriginUrl, setVideoOriginUrl] = useState('');
-
-  useEffect(() => {
-    if (videoUrl === 'move1.mp4') {
-      setVideoOriginUrl(
-        'https://file.notion.so/f/f/8cc0dec5-f2e0-466a-8c78-8acdaf51b4a8/4ced9543-73b6-4cd9-8d1a-1b8a9d6d2af3/move1.mp4?table=block&id=1ec80235-7b23-809d-a7dc-cd5f88f177d1&spaceId=8cc0dec5-f2e0-466a-8c78-8acdaf51b4a8&expirationTimestamp=1749729600000&signature=XhHHgrjYtbW7F1C6aFP_z1tjT6SYh7r-MWoiGgdfkAg&downloadName=move1.MP4.mp4'
-      );
-    } else {
-      setVideoOriginUrl(
-        'https://file.notion.so/f/f/8cc0dec5-f2e0-466a-8c78-8acdaf51b4a8/4ced9543-73b6-4cd9-8d1a-1b8a9d6d2af3/move1.mp4?table=block&id=1ec80235-7b23-809d-a7dc-cd5f88f177d1&spaceId=8cc0dec5-f2e0-466a-8c78-8acdaf51b4a8&expirationTimestamp=1749729600000&signature=XhHHgrjYtbW7F1C6aFP_z1tjT6SYh7r-MWoiGgdfkAg&downloadName=move1.MP4.mp4'
-      );
-    }
-  }, [videoUrl]);
-
   useEffect(() => {
     const interval = setInterval(() => {
       const currentTime = videoRef?.current?.currentTime;
@@ -85,7 +71,7 @@ const Cam = ({ videoRef, videoUrl, timestamps }: CamProps) => {
         controls
         autoPlay
         muted
-        src={videoOriginUrl}
+        src={videoUrl}
       >
         브라우저가 video 태그를 지원하지 않습니다.
       </video>

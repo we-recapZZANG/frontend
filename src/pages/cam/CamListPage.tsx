@@ -7,8 +7,9 @@ const CamListPage = () => {
 
   const storedUplodedCams = uplodedCams ? JSON.parse(uplodedCams) : null;
 
-  if (storedUplodedCams.legnth === 0) {
+  if (!storedUplodedCams || storedUplodedCams.length === 0) {
     navigate('/cam/upload');
+    return <></>;
   }
 
   return (

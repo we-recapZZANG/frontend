@@ -111,7 +111,12 @@ const EditStoryPage = () => {
           저장하기
         </button>
       </form>
-      {isSubmitting && <ProgressBarWithRandom />}
+      {isSubmitting && (
+        <div className="flex h-screen items-center justify-center">
+          <p>음성 변환 요청 중</p>
+          <ProgressBarWithRandom />
+        </div>
+      )}
     </DetailLayout>
   );
 };

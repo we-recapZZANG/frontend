@@ -12,7 +12,7 @@ const CardWrapper = ({
   const sizeClasses = {
     small: 'w-[80px] h-[80px] p-2 rounded-2xl flex items-center',
     medium: 'w-[155px] h-[120px] p-4 rounded-2xl',
-    large: 'w-full  p-6 rounded-2xl',
+    large: 'w-full  p-3 rounded-2xl',
   };
 
   return (

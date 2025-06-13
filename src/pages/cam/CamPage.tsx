@@ -15,24 +15,7 @@ type TimstampDataType = {
 };
 
 const TimstampData: TimstampDataType = {
-  'baby1.mp4': {
-    timeStamps: [
-      { category: 'etc', timeStamp: '00:12' },
-      { category: 'etc', timeStamp: '00:13' },
-      { category: 'etc', timeStamp: '00:16' },
-      { category: 'etc', timeStamp: '00:18' },
-      { category: 'etc', timeStamp: '00:30' },
-      { category: 'etc', timeStamp: '00:31' },
-      { category: 'etc', timeStamp: '00:33' },
-      { category: 'etc', timeStamp: '00:34' },
-      { category: 'etc', timeStamp: '00:36' },
-      { category: 'faceDown', timeStamp: '00:58' },
-    ],
-    videoUrl:
-      'https://file.notion.so/f/f/8cc0dec5-f2e0-466a-8c78-8acdaf51b4a8/5587a5ab-5f25-4291-b30f-5d781d743e44/finalnight.mp4?table=block&id=21080235-7b23-80f2-822b-c69774dae52b&spaceId=8cc0dec5-f2e0-466a-8c78-8acdaf51b4a8&expirationTimestamp=1749772800000&signature=UAmKQqXkwTOkFIO7XMWHIzJ3akf_-gbYbo_waHDdh7A&downloadName=finalnight.MP4.mp4',
-  },
-
-  'baby2.mp4': {
+  baby1: {
     timeStamps: [
       { category: 'etc', timeStamp: '00:00' },
       { category: 'etc', timeStamp: '00:08' },
@@ -44,17 +27,17 @@ const TimstampData: TimstampDataType = {
       { category: 'faceDown', timeStamp: '00:39' },
     ],
     videoUrl:
-      'https://file.notion.so/f/f/8cc0dec5-f2e0-466a-8c78-8acdaf51b4a8/d898f7fe-c7a4-4430-9f4f-494369a053aa/finalbright.mp4?table=block&id=21080235-7b23-80e9-ae5d-d73621ed93ef&spaceId=8cc0dec5-f2e0-466a-8c78-8acdaf51b4a8&expirationTimestamp=1749744000000&signature=HxmLRZO4Hwuf4Gfn2j8neJBNCl0rAVvNTFCx7pTj-QY&downloadName=finalbright.MP4.mp4',
+      'https://file.notion.so/f/f/8cc0dec5-f2e0-466a-8c78-8acdaf51b4a8/d898f7fe-c7a4-4430-9f4f-494369a053aa/finalbright.mp4?table=block&id=21080235-7b23-80e9-ae5d-d73621ed93ef&spaceId=8cc0dec5-f2e0-466a-8c78-8acdaf51b4a8&expirationTimestamp=1749801600000&signature=NFD0A66PMof8T39XcxNbPEMb_GPQXsq_QB0pFPUR0FY&downloadName=finalbright.MP4.mp4',
   },
 
-  'baby3.mp4': {
+  baby2: {
     timeStamps: [
       { category: 'etc', timeStamp: '00:10' },
       { category: 'etc', timeStamp: '00:13' },
       { category: 'etc', timeStamp: '00:14' },
     ],
     videoUrl:
-      'https://file.notion.so/f/f/8cc0dec5-f2e0-466a-8c78-8acdaf51b4a8/dd8cf4cd-53ab-4bef-b7af-81c30ce64627/move4.mp4?table=block&id=21080235-7b23-80a0-9ae4-d4f6ccfc367f&spaceId=8cc0dec5-f2e0-466a-8c78-8acdaf51b4a8&expirationTimestamp=1749744000000&signature=aeVyH1Nr1pogY3d0OReg_9aNQ1LmF_MQlmRZq3_dAvk&downloadName=move4.MP4.mp4',
+      'https://file.notion.so/f/f/8cc0dec5-f2e0-466a-8c78-8acdaf51b4a8/dd8cf4cd-53ab-4bef-b7af-81c30ce64627/move4.mp4?table=block&id=21080235-7b23-80a0-9ae4-d4f6ccfc367f&spaceId=8cc0dec5-f2e0-466a-8c78-8acdaf51b4a8&expirationTimestamp=1749801600000&signature=eOGfP1FncF50zJme9ehkZvjVK3lgfvhWzzp0-VL6rUQ&downloadName=move4.MP4.mp4',
   },
 };
 
@@ -66,7 +49,7 @@ const CamPage = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
-    if (camTitle === 'default') {
+    if (camTitle === 'default' && !isOpen) {
       fetchVideoUrl();
       fetchTimestamps();
     } else if (camTitle && TimstampData[camTitle]) {
@@ -76,7 +59,7 @@ const CamPage = () => {
     } else {
       console.warn('해당 camTitle에 대한 타임스탬프가 없습니다.');
     }
-  }, [camTitle]);
+  }, [camTitle, isOpen]);
 
   const parseTime = (time: string) => {
     const [min, sec] = time.split(':').map(Number);

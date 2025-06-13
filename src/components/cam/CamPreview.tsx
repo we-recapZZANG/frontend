@@ -14,18 +14,15 @@ const CamPreview = ({ camUrl }: CamPreviewProps) => {
 
   return (
     <CardWrapper onClick={handleClick} size="large">
-      <div className="flex items-center justify-center">
-        <img
-          src="/icon/rabbit.png"
-          alt="storybook-archive"
-          width={80}
-          height={80}
-        />
-      </div>
+      <img
+        src={`/cam/${camUrl}.png`}
+        alt="storybook-archive"
+        width={250}
+        height={80}
+        className="rounded-md"
+      />
 
-      <div className="p-4">
-        <h3 className="text-lg font-semibold">{camUrl}</h3>
-      </div>
+      <h4 className="text-md font-semibold">{camUrl}</h4>
     </CardWrapper>
   );
 };

@@ -10,6 +10,7 @@ const CamListPage = () => {
   if (!storedUplodedCams || storedUplodedCams.length === 0) {
     return (
       <div className="flex h-screen items-center justify-center flex-col gap-5">
+        <p>수면 영상이 없습니다!</p>
         <button
           type="button"
           onClick={() => navigate('/cam/upload')}
@@ -22,15 +23,15 @@ const CamListPage = () => {
           onClick={() => navigate('/sleep/default')}
           className="w-[200px] h-[50px] bg-pink-400 text-white py-2 px-4 rounded-xl hover:bg-pink-300 transition-colors duration-200"
         >
-          실시간 영상 분석
+          실시간 영상 분석 하기
         </button>
       </div>
     );
   }
 
   return (
-    <div className="flex items-center  flex-col ">
-      <div className="grid grid-cols-2 gap-3 p-5">
+    <div className="flex items-center  flex-col pb-50 ">
+      <div className="grid grid-cols-1 gap-3 p-5">
         {storedUplodedCams.map((camUrl: string) => {
           return <CamPreview camUrl={camUrl} />;
         })}

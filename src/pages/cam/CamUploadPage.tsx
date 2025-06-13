@@ -59,7 +59,7 @@ const CamUploadPage = () => {
   return (
     <div className="min-h-screen bg-[#fffbf3] flex flex-col">
       <main className="flex justify-center mt-6">
-        <div className="bg-white rounded-xl p-6 shadow-sm w-full max-w-md">
+        <div className="bg-white rounded-xl p-6 shadow-sm w-[90%] max-w-md">
           <h2 className="text-sm font-bold mb-4">영상 업로드</h2>
 
           <div className="bg-[#f4f4f4] rounded-xl flex flex-col items-center justify-center h-52 mb-6 px-4">
